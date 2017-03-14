@@ -1,0 +1,62 @@
+@CHARSET "UTF-8";
+
+/* body */
+.body {
+	background: rgba(0, 0, 0, 0) -moz-linear-gradient(-45deg, #183850 0px, #183850 25%, #192c46 50%, #22254c 75%, #22254c 100%) no-repeat fixed 0 0;
+}
+
+/* navigation bar */
+.navigation {
+	font-size: 30px;
+}
+.nav-btn-left {
+	float: left;
+}
+.nav-btn-right {
+	float: right;
+}
+.nav-login-regist {
+	padding: 0 2px 0 0;
+}
+
+/* 导航栏下拉列表 */
+.nar-btn {
+	position: relative;
+}
+.nar-btn:HOVER .list{
+	display: block;
+}
+.list {
+	width: 60px !important;
+	display: none;
+	position: absolute;
+}
+
+/* search */
+.search-row {
+	margin: 50px auto;
+	text-align: center;
+	width: 50%;
+}
+.search-div {
+	float: none;
+	margin: 0 auto;
+}
+.search-input {
+	height: 42px;
+}
+
+/* chat */
+.panel-chat-div{
+    width: 100%;
+    margin-bottom: 60px;
+    margin-top: 20px;
+    min-height: 500px;
+    text-align: center;
+}
+.chat-div {
+	width: 50%;
+	float: none;
+	margin: 0 auto;
+}
+

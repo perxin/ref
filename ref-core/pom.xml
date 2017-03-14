@@ -17,6 +17,19 @@
         <maven.version>3.3.9</maven.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.ref</groupId>
+            <artifactId>ref-base</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ref</groupId>
+            <artifactId>ref-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <finalName>ref-core</finalName>
         <plugins>

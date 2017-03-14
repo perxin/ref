@@ -385,6 +385,11 @@
             <artifactId>javax.ws.rs-api</artifactId>
             <version>2.1-m05</version>
         </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>2.26-b02</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -1,5 +1,6 @@
 package com.ref.service.impl;
 
+import com.ic.base.exception.BusinessException;
 import com.ref.entity.user.User;
 import com.ref.dao.user.UserMapper;
 import com.ref.service.UserService;
@@ -13,7 +14,12 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userMapper;
 
 	@Override
-	public User getUserByName(String name) {
+	public void add(User user) throws BusinessException {
+
+	}
+
+	@Override
+	public User getUserByName(String name) throws BusinessException {
 		return userMapper.selectUserByName(name);
 	}
 

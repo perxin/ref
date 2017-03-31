@@ -10,29 +10,7 @@
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
 	default-lazy-init="true">
 
-	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/user/login" />
-		<property name="successUrl" value="/ring/index" />
-		<property name="unauthorizedUrl" value="/error/404" />
-		<property name="filterChainDefinitions">
-			<value>
-				<!-- authc 表示需要认证才能访问的页面 -->
-				<!-- perms 表示需要该权限才能访问的页面 -->
-				/ring/index = anon
-			</value>
-		</property>
-	</bean>
-
-	<bean id="customJdbcRealm" class="com.ref.shiro.CustomJdbcRealm">
-		<property name="userService" ref="userService" />
-	</bean>
-
-	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="realm" ref="customJdbcRealm"></property>
-	</bean>
-
-	<bean id="userService" class="com.ref.service.impl.user.UserServiceImpl"></bean>
+	<bean id="userService" class="com.ref.service.user.impl.user.UserServiceImpl" />
 
 	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>

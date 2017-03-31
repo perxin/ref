@@ -1,6 +1,6 @@
-package com.ref.entity.user;
+package com.ref.model.user;
 
-import com.ref.entity.BaseEntity;
+import com.ref.base.model.BaseEntity;
 
 public class User extends BaseEntity {
     

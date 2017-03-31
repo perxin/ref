@@ -17,8 +17,7 @@
 	<dubbo:consumer check="false" timeout="300000"/>
 	<dubbo:annotation package="com.ic"/>
 	
-	<dubbo:reference interface="com.ref.service.ring.RingService" id="ringService" />
-	
+
 	<dubbo:reference interface="com.ref.service.user.UserService" id="userService" />
 
 </beans>

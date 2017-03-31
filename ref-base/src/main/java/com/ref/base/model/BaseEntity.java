@@ -1,4 +1,4 @@
-package com.ref.entity;
+package com.ref.base.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
@@ -7,29 +7,29 @@ import java.util.Date;
 public abstract class BaseEntity {
 	
 	private static final long serialVersionUID = -5284494226304695232L;
-	
+
 	/**
 	 * @Description  createDate
 	 */
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")
 	private Date createDate;
-	
+
 	/**
 	 * @Description createBy
 	 */
     private String createBy;
-	
+
 	/**
 	 * @Description updateDate
 	 */
     @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date updateDate;
-	
+
 	/**
 	 * @Description updateBy
 	 */
     private String updateBy;
-	
+
 	/**
 	 * @Description deleted
 	 */
@@ -80,5 +80,5 @@ public abstract class BaseEntity {
 	 * @return id
 	 */
 	public abstract Object getPrimaryKey();
-	
+
 }

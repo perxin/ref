@@ -12,6 +12,10 @@
     <artifactId>ref-web</artifactId>
     <packaging>jar</packaging>
 
+    <properties>
+        <jersey.version>1.19.3</jersey.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.ref</groupId>
@@ -282,15 +286,6 @@
             <artifactId>xmemcached</artifactId>
             <version>2.0.0</version>
         </dependency>
-        <!-- unit test lib -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.0</version>
-        </dependency>
-        <!-- httpclient -->
-        <!-- <dependency> <groupId>org.apache.httpcomponents</groupId> <artifactId>httpclient</artifactId>
-            <version>4.4</version> </dependency> -->
 
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -327,12 +322,6 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.7</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.0.1</version>
         </dependency>
 
         <dependency>
@@ -383,12 +372,37 @@
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1-m05</version>
+            <version>${javax.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
+            <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-server</artifactId>
-            <version>2.26-b02</version>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-core</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-servlet</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-multipart</artifactId>
+            <version>${jersey.version}</version>
         </dependency>
     </dependencies>
 

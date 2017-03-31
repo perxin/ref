@@ -3,7 +3,7 @@
 <generatorConfiguration>
 
     <!-- 引入配置文件 -->
-    <properties resource="generator.properties"/>
+    <properties resource="generator.propertites"/>
 
     <!--数据库驱动包路径 -->
     <classPathEntry location="${drive.class.path}"/>

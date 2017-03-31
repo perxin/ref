@@ -19,13 +19,6 @@
     </properties>
 
     <dependencies>
-        <!-- google验证码  -->
-        <!--<dependency>
-            <groupId>com.google.code.kaptcha</groupId>
-            <artifactId>kaptcha</artifactId>
-            <version>${google.code.version}</version>
-        </dependency>-->
-
         <!-- 时间处理工具 -->
         <dependency>
             <groupId>joda-time</groupId>
@@ -101,9 +94,9 @@
             <version>3.2.1</version>
         </dependency>
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.5</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
         </dependency>
 
         <!-- image -->
@@ -117,6 +110,12 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>${javax.version}</version>
         </dependency>
     </dependencies>
 

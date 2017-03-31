@@ -10,7 +10,10 @@ public class CommonConstant {
 
     public static enum ErrorCode {
 
-        ERROR_CODE_CUSTOM(0xFF0000, "自定义");
+        ERROR_CODE_CUSTOM(0xFF0000, "自定义"),
+        ERROR_CODE_PARAMETER_ILLEGAL(0xFF0001, "缺少参数或参数不合法"),
+        ERROR_CODE_ACCOUNT_NOT_EXIST(0xFF0002, "账号不存在"),
+        ERROR_CODE_ACCOUNT_ERROR(0xFF0003, "账号或密码错误");
 
         private Integer code;
 

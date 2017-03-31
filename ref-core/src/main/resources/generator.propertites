@@ -1,9 +1,9 @@
-drive.class.path=D:\\work\\lib\\mysql\\mysql-connector-java\\6.0.3\\mysql-connector-java-6.0.3.jar
-targetProject=ref-core/src/main/java
-jdbc_driver=net.sf.log4jdbc.DriverSpy
-jdbc_url=jdbc\:log4jdbc:mysql://localhost:3306/ref?serverTimezone=UTC&amp;characterEncoding=utf-8
+drive.class.path=D:\\work\\lib\\mysql\\mysql-connector-java\\5.1.35\\mysql-connector-java-5.1.35.jar
+targetProject=src/main/java
+jdbc_driver=com.mysql.jdbc.Driver
+jdbc_url=jdbc:mysql://localhost:3306/ref?serverTimezone=UTC&amp;characterEncoding=utf-8
 jdbc_user=root
 jdbc_password=123456
 table_name=user
 entity_name=User
-package_prefix=com.ref.user
+package_prefix=com.ref

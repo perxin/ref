@@ -1,7 +1,7 @@
 package com.ref.base.util;
 
-import com.ic.base.constants.CommonConstants.ErrorCode;
-import com.ic.base.exception.BusinessException;
+import com.ref.base.exception.BusinessException;
+import com.ref.base.constant.CommonConstant.ErrorCode;
 import org.apache.commons.lang3.StringUtils;
 import sun.misc.BASE64Encoder;
 

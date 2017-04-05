@@ -1,4 +1,4 @@
-package com.ref.service.user.impl.user;
+package com.ref.service.impl.user;
 
 import com.ref.base.exception.BusinessException;
 import com.ref.base.constant.CommonConstant.ErrorCode;

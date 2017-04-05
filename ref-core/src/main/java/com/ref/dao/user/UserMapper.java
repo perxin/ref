@@ -1,7 +1,6 @@
 package com.ref.dao.user;
 
 import com.ref.model.user.User;
-
 import org.springframework.stereotype.Repository;
 
 @Repository

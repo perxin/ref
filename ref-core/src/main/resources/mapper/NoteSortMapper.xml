@@ -1,62 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ref.dao.UserMapper">
-    <resultMap id="BaseResultMap" type="com.ref.model.User">
+<mapper namespace="com.ref.dao.user.NoteSortMapper">
+    <resultMap id="BaseResultMap" type="com.ref.model.user.NoteSort">
         <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="password" jdbcType="VARCHAR" property="password"/>
-        <result column="phone" jdbcType="VARCHAR" property="phone"/>
-        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
         <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
         <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
         <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
         <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
         <result column="deleted" jdbcType="TINYINT" property="deleted"/>
     </resultMap>
-    <sql id="Base_Table_Name" >
-        user
-    </sql>
     <sql id="Base_Column_List">
-        id, name, password, phone, email, create_date, create_by, update_date, update_by,
-        deleted
+        id, parent_id, name, level, create_date, create_by, update_date, update_by, deleted
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from user
+        from note_sort
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from user
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-    <insert id="insert" parameterType="com.ref.model.User" useGeneratedKeys="true" keyProperty="id">
-        insert into user (id, name, password,
-          phone, email, create_date,
-          create_by, update_date, update_by,
-          deleted)
-        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-          #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
-          #{createBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
-          #{deleted,jdbcType=TINYINT})
-  </insert>
-    <insert id="insertSelective" parameterType="com.ref.model.User" useGeneratedKeys="true" keyProperty="id">
-        insert into user
+        delete from note_sort
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.ref.model.user.NoteSort">
+        insert into note_sort (id, parent_id, name,
+        level, create_date, create_by,
+        update_date, update_by, deleted
+        )
+        values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+        #{level,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR},
+        #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.ref.model.user.NoteSort">
+        insert into note_sort
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
             </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
             <if test="name != null">
                 name,
             </if>
-            <if test="password != null">
-                password,
-            </if>
-            <if test="phone != null">
-                phone,
-            </if>
-            <if test="email != null">
-                email,
+            <if test="level != null">
+                level,
             </if>
             <if test="createDate != null">
                 create_date,
@@ -78,17 +70,14 @@
             <if test="id != null">
                 #{id,jdbcType=BIGINT},
             </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=INTEGER},
+            </if>
             <if test="name != null">
                 #{name,jdbcType=VARCHAR},
             </if>
-            <if test="password != null">
-                #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="phone != null">
-                #{phone,jdbcType=VARCHAR},
-            </if>
-            <if test="email != null">
-                #{email,jdbcType=VARCHAR},
+            <if test="level != null">
+                #{level,jdbcType=INTEGER},
             </if>
             <if test="createDate != null">
                 #{createDate,jdbcType=TIMESTAMP},
@@ -107,20 +96,17 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ref.model.User">
-        update user
+    <update id="updateByPrimaryKeySelective" parameterType="com.ref.model.user.NoteSort">
+        update note_sort
         <set>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=INTEGER},
+            </if>
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
             </if>
-            <if test="password != null">
-                password = #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="phone != null">
-                phone = #{phone,jdbcType=VARCHAR},
-            </if>
-            <if test="email != null">
-                email = #{email,jdbcType=VARCHAR},
+            <if test="level != null">
+                level = #{level,jdbcType=INTEGER},
             </if>
             <if test="createDate != null">
                 create_date = #{createDate,jdbcType=TIMESTAMP},
@@ -140,10 +126,16 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <select id="selectUserByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
-        SELECT <include refid="Base_Column_List" />
-        FROM <include refid="Base_Table_Name" />
-        WHERE deleted = '0'
-            AND name = #{name,jdbcType=VARCHAR}
-    </select>
+    <update id="updateByPrimaryKey" parameterType="com.ref.model.user.NoteSort">
+        update note_sort
+        set parent_id = #{parentId,jdbcType=INTEGER},
+        name = #{name,jdbcType=VARCHAR},
+        level = #{level,jdbcType=INTEGER},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=VARCHAR},
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+        update_by = #{updateBy,jdbcType=VARCHAR},
+        deleted = #{deleted,jdbcType=TINYINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

@@ -2,9 +2,6 @@ package com.ref.base.exception;
 
 import com.ref.base.constant.CommonConstant.ErrorCode;
 
-/**
- * Created by perxin on 2017/3/14.
- */
 public class BusinessException extends RuntimeException {
     static final long serialVersionUID = -7036897290745746979L;
 

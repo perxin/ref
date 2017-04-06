@@ -4,9 +4,9 @@ package com.ref.base.constant;
  * Created by perxin on 2017/3/14.
  */
 public class CommonConstant {
-    public static final String SUCCESS_JSON = "\"status\":\"success\"";
+    public static final String SUCCESS_JSON = "{\"status\":\"success\"}";
 
-    public static final String FAILURE_JSON = "\"status\":\"failure\"";
+    public static final String FAILURE_JSON = "{\"status\":\"failure\"}";
 
     public static enum ErrorCode {
 

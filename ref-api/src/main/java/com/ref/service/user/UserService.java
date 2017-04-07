@@ -9,6 +9,6 @@ public interface UserService {
 
 	User getUserByName(String name) throws BusinessException;
 
-	void postLogin(String name, String password) throws BusinessException;
+	User postLogin(String name, String password) throws BusinessException;
 
 }

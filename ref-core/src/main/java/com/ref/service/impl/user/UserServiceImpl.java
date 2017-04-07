@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void postLogin(String name, String password) throws BusinessException {
+	public User postLogin(String name, String password) throws BusinessException {
 		if (StringUtils.isBlank(name) || StringUtils.isBlank(password)) {
 			throw new BusinessException(ErrorCode.ERROR_CODE_ACCOUNT_ERROR);
 		}
@@ -54,5 +54,6 @@ public class UserServiceImpl implements UserService {
 		if (user == null || !user.getPassword().equals(MD5Util.encrypt(password))) {
 			throw new BusinessException(ErrorCode.ERROR_CODE_ACCOUNT_ERROR);
 		}
+		return user;
 	}
 }

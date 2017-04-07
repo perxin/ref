@@ -3,10 +3,12 @@ package com.ref.base.Resource;
 import com.alibaba.fastjson.JSONObject;
 import com.ref.base.constant.CommonConstant.ErrorCode;
 import com.ref.base.exception.BusinessException;
+import com.ref.base.model.UserBind;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -55,5 +57,13 @@ public class BaseResource {
 
     public static Response returnSuccess() {
         return Response.status(Status.OK).build();
+    }
+
+    protected void setSession(HttpServletRequest request, UserBind userBind) {
+        request.getSession().setAttribute("userBind:" + userBind.getUserId(), userBind);
+    }
+
+    protected void removeSession(HttpServletRequest request, String userId) {
+        request.getSession().removeAttribute("userBind:" + userId);
     }
 }

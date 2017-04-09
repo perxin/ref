@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import java.util.Date;
 
@@ -26,33 +27,27 @@ public class UserResource extends BaseResource {
 	private UserService userService;
 
 	@POST
-	@Path(Constants.ROUTE_USER_REGISTER)
+	@Path(Constants.ROUTE_USER_SIGN_UP)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response register(@FormParam("name") String name, @FormParam("password") String password) throws BusinessException {
+	public Response signUp(@FormParam("name") String name, @FormParam("password") String password) throws BusinessException {
 		userService.add(name, password);
 		return returnSuccess(CommonConstant.SUCCESS_JSON);
 	}
 
 	@POST
-	@Path(Constants.ROUTE_USER_LOGIN)
+	@Path(Constants.ROUTE_USER_SIGN_IN)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response login(@Context HttpServletRequest request, @FormParam("name") String name, @FormParam("password") String password) {
+	public Response signIn(@Context Request request, @FormParam("name") String name, @FormParam("password") String password) {
 		User user = userService.postLogin(name, password);
-		UserBind userBind = new UserBind(user.getId(), user.getName(), user.getPhone(), user.getEmail(), new Date(), request.getRemoteAddr());
-		setSession(request, userBind);
-		return returnSuccess(JsonUtil.objectToJson(userBind));
+//		UserBind userBind = new UserBind(user.getId(), user.getName(), user.getPhone(), user.getEmail(), new Date(), request.getRemoteAddr());
+//		setSession(request, userBind);
+		return returnSuccess(JsonUtil.objectToJson(null));
 	}
 
 	@PUT
 	@Path(Constants.ROUTE_USER_LOGOUT)
 	public Response logout(HttpServletRequest request, @PathParam("userId") String userId) {
-		removeSession(request, userId);
-		return returnSuccess(CommonConstant.SUCCESS_JSON);
-	}
 
-	@GET
-	@Path("/a")
-	public Response a() {
 		return returnSuccess(CommonConstant.SUCCESS_JSON);
 	}
 

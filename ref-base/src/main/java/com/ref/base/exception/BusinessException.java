@@ -1,5 +1,6 @@
 package com.ref.base.exception;
 
+import com.alibaba.fastjson.JSONObject;
 import com.ref.base.constant.CommonConstant.ErrorCode;
 
 public class BusinessException extends RuntimeException {
@@ -7,16 +8,16 @@ public class BusinessException extends RuntimeException {
 
     private ErrorCode errorCode;
 
-    private String detailMsg;
+    private String description;
 
     public BusinessException() {
 
     }
 
-    public BusinessException(ErrorCode errorCode, String detailMsg) {
+    public BusinessException(ErrorCode errorCode, String description) {
         super(errorCode.getDescription());
         this.errorCode = errorCode;
-        this.detailMsg = detailMsg;
+        this.description = description;
     }
 
     public BusinessException(ErrorCode errorCode) {
@@ -37,11 +38,18 @@ public class BusinessException extends RuntimeException {
         this.errorCode = errorCode;
     }
 
-    public String getDetailMsg() {
-        return detailMsg;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDetailMsg(String detailMsg) {
-        this.detailMsg = detailMsg;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String toJsonStr() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("errorCode", errorCode.getCode());
+        jsonObject.put("description", errorCode.getDescription());
+        return jsonObject.toString();
     }
 }

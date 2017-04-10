@@ -3,8 +3,8 @@ package com.ref.resources.user;
 import com.ref.base.Resource.BaseResource;
 import com.ref.base.constant.CommonConstant;
 import com.ref.base.exception.BusinessException;
+import com.ref.base.util.RSAUtil;
 import com.ref.constant.Constants;
-import com.ref.filter.TokenHolder;
 import com.ref.model.user.Token;
 import com.ref.model.user.User;
 import com.ref.service.user.UserService;
@@ -39,7 +39,7 @@ public class UserResource extends BaseResource {
 	public Response signIn(@FormParam("name") String name, @FormParam("password") String password) {
 		User user = userService.postLogin(name, password);
 		Token token = new Token(user.getId(), user.getName(), null, null, new Date(), null, 60 * 60L);
-		NewCookie cookie = new NewCookie("token", token.toString(), "/", null, null, 60 * 60, false);
+		NewCookie cookie = new NewCookie("token", RSAUtil.encrypt(user.getId().toString(),RSAUtil.STR_PUBLIC_KEY), "/", null, null, 60 * 60, false);
 		return Response.status(Status.OK).entity(CommonConstant.SUCCESS_JSON).cookie(cookie).type(MediaType.APPLICATION_JSON).build();
 	}
 
@@ -47,9 +47,8 @@ public class UserResource extends BaseResource {
 	@Path(Constants.ROUTE_USER_LOGOUT)
 	public Response logout(@CookieParam("token") String token) {
 		System.out.println(token);
-        System.out.println(TokenHolder.getToken(token));
-        System.out.println(TokenHolder.getUserId(token));
-        NewCookie cookie = new NewCookie("token=", "", "/", null, null, 0, true);
+        System.out.println(RSAUtil.decrypt(token, RSAUtil.STR_PRIVATE_KEY));
+        NewCookie cookie = new NewCookie("token", "", "/", null, null, 0, false);
 		return Response.status(Status.OK).entity(CommonConstant.SUCCESS_JSON).cookie(cookie).type(MediaType.APPLICATION_JSON).build();
 	}
 

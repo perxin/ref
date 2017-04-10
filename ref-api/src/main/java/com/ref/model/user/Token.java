@@ -1,12 +1,13 @@
-package com.ref.base.model;
+package com.ref.model.user;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
+ *
  * Created by perxin on 2017/4/7.
  */
-public class UserBind implements Serializable {
+public class Token implements Serializable {
 
     private Long userId;
 
@@ -20,23 +21,30 @@ public class UserBind implements Serializable {
 
     private String loginIp;
 
-    public UserBind(long userId, String name, String phone, String email, Date loginTime, String loginIp) {
+    /**
+     * 有效时间:单位秒
+     */
+    private Long expiredTime;
+
+    public Token(long userId, String name, String phone, String email, Date loginTime, String loginIp, Long expiredTime) {
         this.userId = userId;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.loginTime = loginTime;
         this.loginIp = loginIp;
+        this.expiredTime = expiredTime;
     }
 
-    public UserBind(UserBind userBind) {
-        if(userBind != null) {
-            this.userId = userBind.userId;
-            this.name = userBind.name;
-            this.phone = userBind.phone;
-            this.email = userBind.email;
-            this.loginTime = userBind.loginTime;
-            this.loginIp = userBind.loginIp;
+    public Token(Token token) {
+        if(token != null) {
+            this.userId = token.userId;
+            this.name = token.name;
+            this.phone = token.phone;
+            this.email = token.email;
+            this.loginTime = token.loginTime;
+            this.loginIp = token.loginIp;
+            this.expiredTime = token.expiredTime;
         }
     }
 
@@ -86,5 +94,18 @@ public class UserBind implements Serializable {
 
     public void setLoginIp(String loginIp) {
         this.loginIp = loginIp;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", loginTime=" + loginTime +
+                ", loginIp='" + loginIp + '\'' +
+                ", expiredTime=" + expiredTime +
+                '}';
     }
 }

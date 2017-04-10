@@ -7,8 +7,7 @@ package com.ref.constant;
 public class Constants {
 
     public static final String ROUTE_USER = "user";
-    public static final String ROUTE_USER_REGISTER = "/register";
-    public static final String ROUTE_USER_LOGIN = "/login";
-    public static final String ROUTE_USER_LOGOUT = "/logout/{userId}";
-
+    public static final String ROUTE_USER_SIGN_UP = "/sign_up";
+    public static final String ROUTE_USER_SIGN_IN = "/sign_in";
+    public static final String ROUTE_USER_LOGOUT = "/logout";
 }

@@ -29,8 +29,9 @@ public class UserResource extends BaseResource {
 	@Path(Constants.ROUTE_USER_SIGN_UP)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response signUp(@FormParam("name") String name, @FormParam("password") String password) throws BusinessException {
-		userService.add(name, password);
-		return returnSuccess(CommonConstant.SUCCESS_JSON);
+		User user = userService.add(name, password);
+		NewCookie cookie = new NewCookie("token", RSAUtil.encryptByPublicKey(user.getId().toString(),RSAUtil.STR_PUBLIC_KEY), "/", null, null, 60 * 60, false);
+		return Response.status(Status.OK).entity(CommonConstant.SUCCESS_JSON).cookie(cookie).type(MediaType.APPLICATION_JSON).build();
 	}
 
 	@POST
@@ -39,15 +40,14 @@ public class UserResource extends BaseResource {
 	public Response signIn(@FormParam("name") String name, @FormParam("password") String password) {
 		User user = userService.postLogin(name, password);
 		Token token = new Token(user.getId(), user.getName(), null, null, new Date(), null, 60 * 60L);
-		NewCookie cookie = new NewCookie("token", RSAUtil.encrypt(user.getId().toString(),RSAUtil.STR_PUBLIC_KEY), "/", null, null, 60 * 60, false);
+		NewCookie cookie = new NewCookie("token", RSAUtil.encryptByPublicKey(user.getId().toString(),RSAUtil.STR_PUBLIC_KEY), "/", null, null, 60 * 60, false);
 		return Response.status(Status.OK).entity(CommonConstant.SUCCESS_JSON).cookie(cookie).type(MediaType.APPLICATION_JSON).build();
 	}
 
 	@PUT
 	@Path(Constants.ROUTE_USER_LOGOUT)
 	public Response logout(@CookieParam("token") String token) {
-		System.out.println(token);
-        System.out.println(RSAUtil.decrypt(token, RSAUtil.STR_PRIVATE_KEY));
+		System.out.println(getLoginUserId(token));
         NewCookie cookie = new NewCookie("token", "", "/", null, null, 0, false);
 		return Response.status(Status.OK).entity(CommonConstant.SUCCESS_JSON).cookie(cookie).type(MediaType.APPLICATION_JSON).build();
 	}

@@ -5,7 +5,7 @@ import com.ref.model.user.User;
 
 public interface UserService {
 
-	void add(String name, String password) throws BusinessException;
+	User add(String name, String password) throws BusinessException;
 
 	User getUserByName(String name) throws BusinessException;
 

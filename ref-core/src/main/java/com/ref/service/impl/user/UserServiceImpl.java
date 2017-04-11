@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userMapper;
 
 	@Override
-	public void add(String name, String password) throws BusinessException {
+	public User add(String name, String password) throws BusinessException {
 		if (StringUtils.isBlank(name) || StringUtils.isBlank(password)) {
 			throw new BusinessException(ErrorCode.ERROR_CODE_PARAMETER_ILLEGAL);
 		}
@@ -35,9 +35,9 @@ public class UserServiceImpl implements UserService {
 		user.setName(name);
 		user.setPassword(MD5Util.encrypt(password));
 		EntityUtil.insertBefore(user);
-		System.out.println(JsonUtil.objectToJson(user));
 		logger.info(JsonUtil.objectToJson(user));
 		userMapper.insertSelective(user);
+		return user;
 	}
 
 	@Override

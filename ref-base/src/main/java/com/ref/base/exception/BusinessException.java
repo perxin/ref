@@ -15,7 +15,7 @@ public class BusinessException extends RuntimeException {
     }
 
     public BusinessException(ErrorCode errorCode, String description) {
-        super(errorCode.getDescription());
+        super(description == null ? errorCode.getDescription() : description);
         this.errorCode = errorCode;
         this.description = description;
     }
@@ -49,7 +49,7 @@ public class BusinessException extends RuntimeException {
     public String toJsonStr() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("errorCode", errorCode.getCode());
-        jsonObject.put("description", errorCode.getDescription());
+        jsonObject.put("description", description == null ? errorCode.getDescription() : description);
         return jsonObject.toString();
     }
 }

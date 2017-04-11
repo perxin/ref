@@ -3,6 +3,7 @@ package com.ref.base.Resource;
 import com.alibaba.fastjson.JSONObject;
 import com.ref.base.constant.CommonConstant.ErrorCode;
 import com.ref.base.exception.BusinessException;
+import com.ref.base.util.RSAUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +20,8 @@ public class BaseResource {
 
     private static Logger logger = LoggerFactory.getLogger(BaseResource.class);
 
-    protected String getLoginUserId() {
-        return null;
+    protected String getLoginUserId(String token) {
+        return RSAUtil.decryptByPrivateKey(token, RSAUtil.STR_PRIVATE_KEY);
     }
 
     public static Response returnError(Exception e) {

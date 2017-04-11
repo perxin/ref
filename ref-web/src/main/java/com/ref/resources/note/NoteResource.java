@@ -1,9 +1,12 @@
 package com.ref.resources.note;
 
+import com.github.pagehelper.PageInfo;
 import com.ref.base.Resource.BaseResource;
 import com.ref.base.constant.CommonConstant;
+import com.ref.base.util.JsonUtil;
 import com.ref.constant.PathConstants;
 import com.ref.form.note.NoteForm;
+import com.ref.model.note.Note;
 import com.ref.service.note.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,5 +32,12 @@ public class NoteResource extends BaseResource {
         noteForm.setCreateBy(getLoginUserId(token));
         noteService.addNoteAll(noteForm);
         return returnSuccess(CommonConstant.SUCCESS_JSON);
+    }
+
+    @GET
+    @Path(PathConstants.ROUTE_NOTE_GET_PAGE)
+    public Response getPage(Note note) {
+        PageInfo pageInfo = noteService.getPage(note);
+        return returnSuccess(JsonUtil.objectToJson(pageInfo));
     }
 }

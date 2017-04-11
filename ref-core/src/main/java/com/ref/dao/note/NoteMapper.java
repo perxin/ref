@@ -1,6 +1,9 @@
 package com.ref.dao.note;
 
+import com.ref.form.note.NoteForm;
 import com.ref.model.note.Note;
+
+import java.util.List;
 
 public interface NoteMapper {
     int deleteByPrimaryKey(Long id);
@@ -14,4 +17,6 @@ public interface NoteMapper {
     int updateByPrimaryKeySelective(Note record);
 
     int updateByPrimaryKey(Note record);
+
+    List<Note> selectSelective(NoteForm noteForm);
 }

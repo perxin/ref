@@ -1,5 +1,6 @@
 package com.ref.service.impl.note;
 
+import com.github.pagehelper.PageInfo;
 import com.ref.base.constant.CommonConstant;
 import com.ref.base.exception.BusinessException;
 import com.ref.base.util.EntityUtil;
@@ -40,5 +41,10 @@ public class NoteServiceImpl implements NoteService {
         if (StringUtils.isEmpty(noteForm.getContent())) {
             throw new BusinessException(CommonConstant.ErrorCode.ERROR_CODE_PARAMETER_ILLEGAL, "内容不能为空");
         }
+    }
+
+    @Override
+    public PageInfo getPage(Note note) throws BusinessException {
+        return null;
     }
 }

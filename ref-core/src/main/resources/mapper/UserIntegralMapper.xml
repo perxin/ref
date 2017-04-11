@@ -24,7 +24,7 @@
         delete from user_integral
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="com.ref.model.user.UserIntegral">
+    <insert id="insert" parameterType="com.ref.model.user.UserIntegral" useGeneratedKeys="true" keyProperty="id">
         insert into user_integral (id, user_id, total_integral,
         create_date, create_by, update_date,
         update_by, deleted)
@@ -32,7 +32,8 @@
         #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP},
         #{updateBy,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT})
     </insert>
-    <insert id="insertSelective" parameterType="com.ref.model.user.UserIntegral">
+    <insert id="insertSelective" parameterType="com.ref.model.user.UserIntegral" useGeneratedKeys="true"
+            keyProperty="id">
         insert into user_integral
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

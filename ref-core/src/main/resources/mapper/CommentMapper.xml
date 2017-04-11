@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ref.dao.note.CommentMapper">
+    <resultMap id="BaseResultMap" type="com.ref.model.note.Comment">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="note_id" jdbcType="BIGINT" property="noteId"/>
+        <result column="reply_id" jdbcType="BIGINT" property="replyId"/>
+        <result column="type" jdbcType="BIT" property="type"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+        <result column="deleted" jdbcType="TINYINT" property="deleted"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ref.model.note.Comment">
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, note_id, reply_id, type, create_date, create_by, update_date, update_by, deleted
+    </sql>
+    <sql id="Blob_Column_List">
+        content
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from comment
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from comment
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.ref.model.note.Comment" useGeneratedKeys="true" keyProperty="id">
+        insert into comment (id, note_id, reply_id,
+        type, create_date, create_by,
+        update_date, update_by, deleted,
+        content)
+        values (#{id,jdbcType=BIGINT}, #{noteId,jdbcType=BIGINT}, #{replyId,jdbcType=BIGINT},
+        #{type,jdbcType=BIT}, #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT},
+        #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT}, #{deleted,jdbcType=TINYINT},
+        #{content,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ref.model.note.Comment" useGeneratedKeys="true" keyProperty="id">
+        insert into comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="noteId != null">
+                note_id,
+            </if>
+            <if test="replyId != null">
+                reply_id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="noteId != null">
+                #{noteId,jdbcType=BIGINT},
+            </if>
+            <if test="replyId != null">
+                #{replyId,jdbcType=BIGINT},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=BIT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="deleted != null">
+                #{deleted,jdbcType=TINYINT},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ref.model.note.Comment">
+        update comment
+        <set>
+            <if test="noteId != null">
+                note_id = #{noteId,jdbcType=BIGINT},
+            </if>
+            <if test="replyId != null">
+                reply_id = #{replyId,jdbcType=BIGINT},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=BIT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted,jdbcType=TINYINT},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ref.model.note.Comment">
+        update comment
+        set note_id = #{noteId,jdbcType=BIGINT},
+        reply_id = #{replyId,jdbcType=BIGINT},
+        type = #{type,jdbcType=BIT},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=BIGINT},
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+        update_by = #{updateBy,jdbcType=BIGINT},
+        deleted = #{deleted,jdbcType=TINYINT},
+        content = #{content,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ref.model.note.Comment">
+        update comment
+        set note_id = #{noteId,jdbcType=BIGINT},
+        reply_id = #{replyId,jdbcType=BIGINT},
+        type = #{type,jdbcType=BIT},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=BIGINT},
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+        update_by = #{updateBy,jdbcType=BIGINT},
+        deleted = #{deleted,jdbcType=TINYINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

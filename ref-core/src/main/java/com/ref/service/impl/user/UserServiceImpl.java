@@ -19,8 +19,12 @@ public class UserServiceImpl implements UserService {
 
 	private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
+	private final UserMapper userMapper;
+
 	@Autowired
-	private UserMapper userMapper;
+	public UserServiceImpl(UserMapper userMapper) {
+		this.userMapper = userMapper;
+	}
 
 	@Override
 	public User add(String name, String password) throws BusinessException {

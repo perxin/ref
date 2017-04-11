@@ -70,7 +70,7 @@ public class RSAUtil {
     }
 
     private static byte[] encryptByPublicKey(byte[] data, byte[] publicKey) {
-        byte[] result = null;
+        byte[] result;
         try {
             X509EncodedKeySpec spec = new X509EncodedKeySpec(publicKey);
             KeyFactory factory = KeyFactory.getInstance(RSA);
@@ -102,7 +102,7 @@ public class RSAUtil {
     }
 
     private static byte[] decryptByPrivateKey(byte[] data, byte[] privateKey) {
-        byte[] result = null;
+        byte[] result;
         try {
             PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(privateKey);
             KeyFactory factory = KeyFactory.getInstance(RSA);
@@ -136,19 +136,25 @@ public class RSAUtil {
     }
 
     public static String encrypt(String str, String publicKey) {
-        return new BASE64Encoder().encode(encryptToByte(str, publicKey));
-    }
-    public static String decrypt(String str, String privateKey) {
-        return new BASE64Encoder().encode(decryptToByte(str, privateKey));
-    }
-
-    public static byte[] encryptToByte(String str, String publicKey) {
         if (StringUtils.isEmpty(publicKey)) {
             throw new BusinessException(CommonConstant.ErrorCode.ERROR_CODE_CUSTOM, "公钥不能为空");
         }
         if (StringUtils.isEmpty(str)) {
             return null;
         }
+        return new BASE64Encoder().encode(encryptToByte(str, publicKey));
+    }
+    public static String decrypt(String str, String privateKey) {
+        if (StringUtils.isEmpty(privateKey)) {
+            throw new BusinessException(CommonConstant.ErrorCode.ERROR_CODE_CUSTOM, "私钥不能为空");
+        }
+        if (StringUtils.isEmpty(str)) {
+            return null;
+        }
+        return new BASE64Encoder().encode(decryptToByte(str, privateKey));
+    }
+
+    public static byte[] encryptToByte(String str, String publicKey) {
         try {
             Cipher cipher = Cipher.getInstance(RSA);
             cipher.init(Cipher.ENCRYPT_MODE, getPublicKey(publicKey));
@@ -160,12 +166,6 @@ public class RSAUtil {
     }
 
     private static byte[] decryptToByte(String str, String privateKey) {
-        if (StringUtils.isEmpty(privateKey)) {
-            throw new BusinessException(CommonConstant.ErrorCode.ERROR_CODE_CUSTOM, "私钥不能为空");
-        }
-        if (StringUtils.isEmpty(str)) {
-            return null;
-        }
         try {
             Cipher cipher = Cipher.getInstance(RSA);
             cipher.init(Cipher.DECRYPT_MODE, getPrivateKey(privateKey));
@@ -205,7 +205,7 @@ public class RSAUtil {
     /**
      * RSA生成公钥私钥
      * @param length 密钥长度 >=512
-     * @return
+     * @return map
      */
     public static Map<String, String> generateKey(int length) {
         Map<String, String> map = new HashMap<>();

@@ -25,7 +25,7 @@
         delete from note_sort
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" parameterType="com.ref.model.user.NoteSort">
+    <insert id="insert" parameterType="com.ref.model.user.NoteSort" useGeneratedKeys="true" keyProperty="id">
         insert into note_sort (id, parent_id, name,
         level, create_date, create_by,
         update_date, update_by, deleted
@@ -35,7 +35,7 @@
         #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.ref.model.user.NoteSort">
+    <insert id="insertSelective" parameterType="com.ref.model.user.NoteSort" useGeneratedKeys="true" keyProperty="id">
         insert into note_sort
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

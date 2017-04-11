@@ -2,9 +2,10 @@ package com.ref.base.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public abstract class BaseEntity {
+public abstract class BaseEntity implements Serializable {
 	
 	private static final long serialVersionUID = -5284494226304695232L;
 
@@ -17,7 +18,7 @@ public abstract class BaseEntity {
 	/**
 	 * @Description createBy
 	 */
-    private String createBy;
+    private Long createBy;
 
 	/**
 	 * @Description updateDate
@@ -28,7 +29,7 @@ public abstract class BaseEntity {
 	/**
 	 * @Description updateBy
 	 */
-    private String updateBy;
+    private Long updateBy;
 
 	/**
 	 * @Description deleted
@@ -43,14 +44,6 @@ public abstract class BaseEntity {
 		this.createDate = createDate;
 	}
 
-	public String getCreateBy() {
-		return createBy;
-	}
-
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-
 	public Date getUpdateDate() {
 		return updateDate;
 	}
@@ -59,11 +52,19 @@ public abstract class BaseEntity {
 		this.updateDate = updateDate;
 	}
 
-	public String getUpdateBy() {
+	public Long getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(Long createBy) {
+		this.createBy = createBy;
+	}
+
+	public Long getUpdateBy() {
 		return updateBy;
 	}
 
-	public void setUpdateBy(String updateBy) {
+	public void setUpdateBy(Long updateBy) {
 		this.updateBy = updateBy;
 	}
 

@@ -26,7 +26,7 @@
         delete from integral_rule
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="com.ref.model.user.IntegralRule">
+    <insert id="insert" parameterType="com.ref.model.user.IntegralRule" useGeneratedKeys="true" keyProperty="id">
         insert into integral_rule (id, type, integral,
         description, create_date, create_by,
         update_date, update_by, deleted
@@ -36,7 +36,8 @@
         #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.ref.model.user.IntegralRule">
+    <insert id="insertSelective" parameterType="com.ref.model.user.IntegralRule" useGeneratedKeys="true"
+            keyProperty="id">
         insert into integral_rule
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

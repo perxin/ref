@@ -13,7 +13,7 @@
         <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
         <result column="deleted" jdbcType="TINYINT" property="deleted"/>
     </resultMap>
-    <sql id="Base_Table_Name" >
+    <sql id="Base_Table_Name">
         user
     </sql>
     <sql id="Base_Column_List">
@@ -27,19 +27,19 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from user
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete from user
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <insert id="insert" parameterType="com.ref.model.user.User" useGeneratedKeys="true" keyProperty="id">
         insert into user (id, name, password,
-          phone, email, create_date,
-          create_by, update_date, update_by,
-          deleted)
+        phone, email, create_date,
+        create_by, update_date, update_by,
+        deleted)
         values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-          #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
-          #{createBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
-          #{deleted,jdbcType=TINYINT})
-  </insert>
+        #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+        #{createBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
+        #{deleted,jdbcType=TINYINT})
+    </insert>
     <insert id="insertSelective" parameterType="com.ref.model.user.User" useGeneratedKeys="true" keyProperty="id">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -140,10 +140,12 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <select id="selectUserByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
-        SELECT <include refid="Base_Column_List" />
-        FROM <include refid="Base_Table_Name" />
+    <select id="selectUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="Base_Table_Name"/>
         WHERE deleted = '0'
-            AND name = #{name,jdbcType=VARCHAR}
+        AND name = #{name,jdbcType=VARCHAR}
     </select>
 </mapper>

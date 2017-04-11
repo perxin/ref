@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 		EntityUtil.insertBefore(user);
 		logger.info(JsonUtil.objectToJson(user));
 		userMapper.insertSelective(user);
-		return user;
+        return user;
 	}
 
 	@Override

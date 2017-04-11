@@ -3,6 +3,7 @@ package com.ref.form.user;
 import javax.ws.rs.QueryParam;
 
 /**
+ *
  * Created by perxin on 2017/4/6.
  */
 public class UserForm {

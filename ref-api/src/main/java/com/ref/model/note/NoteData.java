@@ -10,6 +10,11 @@ public class NoteData extends BaseEntity {
 
     private String content;
 
+    public NoteData(Long id, String content) {
+        this.id = id;
+        this.content = content;
+    }
+
     public Long getId() {
         return id;
     }

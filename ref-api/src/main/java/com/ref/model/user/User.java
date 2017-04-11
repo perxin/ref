@@ -72,7 +72,7 @@ public class User extends BaseEntity {
     }
 
 	@Override
-	public Object getPrimaryKey() {
+	public Long getPrimaryKey() {
 		return this.id;
 	}
 

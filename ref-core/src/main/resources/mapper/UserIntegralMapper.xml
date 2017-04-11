@@ -2,38 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ref.dao.user.UserIntegralMapper">
     <resultMap id="BaseResultMap" type="com.ref.model.user.UserIntegral">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="total_integral" jdbcType="INTEGER" property="totalIntegral"/>
         <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
-        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
         <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
-        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
         <result column="deleted" jdbcType="TINYINT" property="deleted"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, user_id, total_integral, create_date, create_by, update_date, update_by, deleted
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from user_integral
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from user_integral
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
     </delete>
     <insert id="insert" parameterType="com.ref.model.user.UserIntegral" useGeneratedKeys="true" keyProperty="id">
         insert into user_integral (id, user_id, total_integral,
         create_date, create_by, update_date,
         update_by, deleted)
-        values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{totalIntegral,jdbcType=INTEGER},
-        #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP},
-        #{updateBy,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT})
+        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{totalIntegral,jdbcType=INTEGER},
+        #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP},
+        #{updateBy,jdbcType=BIGINT}, #{deleted,jdbcType=TINYINT})
     </insert>
-    <insert id="insertSelective" parameterType="com.ref.model.user.UserIntegral" useGeneratedKeys="true"
-            keyProperty="id">
+    <insert id="insertSelective" parameterType="com.ref.model.user.UserIntegral" useGeneratedKeys="true" keyProperty="id">
         insert into user_integral
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -63,10 +62,10 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                #{id,jdbcType=INTEGER},
+                #{id,jdbcType=BIGINT},
             </if>
             <if test="userId != null">
-                #{userId,jdbcType=INTEGER},
+                #{userId,jdbcType=BIGINT},
             </if>
             <if test="totalIntegral != null">
                 #{totalIntegral,jdbcType=INTEGER},
@@ -75,13 +74,13 @@
                 #{createDate,jdbcType=TIMESTAMP},
             </if>
             <if test="createBy != null">
-                #{createBy,jdbcType=VARCHAR},
+                #{createBy,jdbcType=BIGINT},
             </if>
             <if test="updateDate != null">
                 #{updateDate,jdbcType=TIMESTAMP},
             </if>
             <if test="updateBy != null">
-                #{updateBy,jdbcType=VARCHAR},
+                #{updateBy,jdbcType=BIGINT},
             </if>
             <if test="deleted != null">
                 #{deleted,jdbcType=TINYINT},
@@ -92,7 +91,7 @@
         update user_integral
         <set>
             <if test="userId != null">
-                user_id = #{userId,jdbcType=INTEGER},
+                user_id = #{userId,jdbcType=BIGINT},
             </if>
             <if test="totalIntegral != null">
                 total_integral = #{totalIntegral,jdbcType=INTEGER},
@@ -101,29 +100,29 @@
                 create_date = #{createDate,jdbcType=TIMESTAMP},
             </if>
             <if test="createBy != null">
-                create_by = #{createBy,jdbcType=VARCHAR},
+                create_by = #{createBy,jdbcType=BIGINT},
             </if>
             <if test="updateDate != null">
                 update_date = #{updateDate,jdbcType=TIMESTAMP},
             </if>
             <if test="updateBy != null">
-                update_by = #{updateBy,jdbcType=VARCHAR},
+                update_by = #{updateBy,jdbcType=BIGINT},
             </if>
             <if test="deleted != null">
                 deleted = #{deleted,jdbcType=TINYINT},
             </if>
         </set>
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.ref.model.user.UserIntegral">
         update user_integral
-        set user_id = #{userId,jdbcType=INTEGER},
+        set user_id = #{userId,jdbcType=BIGINT},
         total_integral = #{totalIntegral,jdbcType=INTEGER},
         create_date = #{createDate,jdbcType=TIMESTAMP},
-        create_by = #{createBy,jdbcType=VARCHAR},
+        create_by = #{createBy,jdbcType=BIGINT},
         update_date = #{updateDate,jdbcType=TIMESTAMP},
-        update_by = #{updateBy,jdbcType=VARCHAR},
+        update_by = #{updateBy,jdbcType=BIGINT},
         deleted = #{deleted,jdbcType=TINYINT}
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

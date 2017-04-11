@@ -1,11 +1,11 @@
-package com.ref.model.user;
+package com.ref.model.note;
 
 import com.ref.base.model.BaseEntity;
 
 public class NoteSort extends BaseEntity {
     private Long id;
 
-    private Integer parentId;
+    private Long parentId;
 
     private String name;
 
@@ -19,11 +19,11 @@ public class NoteSort extends BaseEntity {
         this.id = id;
     }
 
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 
@@ -44,7 +44,7 @@ public class NoteSort extends BaseEntity {
     }
 
     @Override
-    public Object getPrimaryKey() {
+    public Long getPrimaryKey() {
         return this.id;
     }
 

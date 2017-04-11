@@ -1,6 +1,6 @@
-package com.ref.dao.user;
+package com.ref.dao.note;
 
-import com.ref.model.user.NoteSort;
+import com.ref.model.note.NoteSort;
 
 public interface NoteSortMapper {
     int deleteByPrimaryKey(Long id);

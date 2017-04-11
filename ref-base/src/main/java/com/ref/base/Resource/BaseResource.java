@@ -20,8 +20,9 @@ public class BaseResource {
 
     private static Logger logger = LoggerFactory.getLogger(BaseResource.class);
 
-    protected String getLoginUserId(String token) {
-        return RSAUtil.decryptByPrivateKey(token, RSAUtil.STR_PRIVATE_KEY);
+    protected Long getLoginUserId(String token) {
+        String userId = RSAUtil.decryptByPrivateKey(token, RSAUtil.STR_PRIVATE_KEY);
+        return userId == null ? null : Long.parseLong(userId);
     }
 
     public static Response returnError(Exception e) {

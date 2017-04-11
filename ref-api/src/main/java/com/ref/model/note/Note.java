@@ -77,7 +77,7 @@ public class Note extends BaseEntity {
     }
 
     @Override
-    public Object getPrimaryKey() {
+    public Long getPrimaryKey() {
         return this.id;
     }
 }

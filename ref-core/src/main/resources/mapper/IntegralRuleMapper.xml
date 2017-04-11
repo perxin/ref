@@ -2,42 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ref.dao.user.IntegralRuleMapper">
     <resultMap id="BaseResultMap" type="com.ref.model.user.IntegralRule">
-        <id column="id" jdbcType="INTEGER" property="id"/>
+        <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="type" jdbcType="VARCHAR" property="type"/>
         <result column="integral" jdbcType="INTEGER" property="integral"/>
         <result column="description" jdbcType="VARCHAR" property="description"/>
         <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
-        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
         <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
-        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
         <result column="deleted" jdbcType="TINYINT" property="deleted"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, type, integral, description, create_date, create_by, update_date, update_by,
         deleted
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from integral_rule
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from integral_rule
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
     </delete>
     <insert id="insert" parameterType="com.ref.model.user.IntegralRule" useGeneratedKeys="true" keyProperty="id">
         insert into integral_rule (id, type, integral,
         description, create_date, create_by,
         update_date, update_by, deleted
         )
-        values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{integral,jdbcType=INTEGER},
-        #{description,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR},
-        #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}
+        values (#{id,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR}, #{integral,jdbcType=INTEGER},
+        #{description,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT},
+        #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT}, #{deleted,jdbcType=TINYINT}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.ref.model.user.IntegralRule" useGeneratedKeys="true"
-            keyProperty="id">
+    <insert id="insertSelective" parameterType="com.ref.model.user.IntegralRule" useGeneratedKeys="true" keyProperty="id">
         insert into integral_rule
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -70,7 +69,7 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                #{id,jdbcType=INTEGER},
+                #{id,jdbcType=BIGINT},
             </if>
             <if test="type != null">
                 #{type,jdbcType=VARCHAR},
@@ -85,13 +84,13 @@
                 #{createDate,jdbcType=TIMESTAMP},
             </if>
             <if test="createBy != null">
-                #{createBy,jdbcType=VARCHAR},
+                #{createBy,jdbcType=BIGINT},
             </if>
             <if test="updateDate != null">
                 #{updateDate,jdbcType=TIMESTAMP},
             </if>
             <if test="updateBy != null">
-                #{updateBy,jdbcType=VARCHAR},
+                #{updateBy,jdbcType=BIGINT},
             </if>
             <if test="deleted != null">
                 #{deleted,jdbcType=TINYINT},
@@ -114,19 +113,19 @@
                 create_date = #{createDate,jdbcType=TIMESTAMP},
             </if>
             <if test="createBy != null">
-                create_by = #{createBy,jdbcType=VARCHAR},
+                create_by = #{createBy,jdbcType=BIGINT},
             </if>
             <if test="updateDate != null">
                 update_date = #{updateDate,jdbcType=TIMESTAMP},
             </if>
             <if test="updateBy != null">
-                update_by = #{updateBy,jdbcType=VARCHAR},
+                update_by = #{updateBy,jdbcType=BIGINT},
             </if>
             <if test="deleted != null">
                 deleted = #{deleted,jdbcType=TINYINT},
             </if>
         </set>
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.ref.model.user.IntegralRule">
         update integral_rule
@@ -134,10 +133,10 @@
         integral = #{integral,jdbcType=INTEGER},
         description = #{description,jdbcType=VARCHAR},
         create_date = #{createDate,jdbcType=TIMESTAMP},
-        create_by = #{createBy,jdbcType=VARCHAR},
+        create_by = #{createBy,jdbcType=BIGINT},
         update_date = #{updateDate,jdbcType=TIMESTAMP},
-        update_by = #{updateBy,jdbcType=VARCHAR},
+        update_by = #{updateBy,jdbcType=BIGINT},
         deleted = #{deleted,jdbcType=TINYINT}
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

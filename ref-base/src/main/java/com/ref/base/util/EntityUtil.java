@@ -15,7 +15,7 @@ public class EntityUtil {
         entity.setUpdateDate(new Date());
     }
 
-    public static void insertBefore(BaseEntity entity, String userId) {
+    public static void insertBefore(BaseEntity entity, Long userId) {
         insertBefore(entity);
         entity.setCreateBy(userId);
         entity.setUpdateBy(userId);
@@ -26,7 +26,7 @@ public class EntityUtil {
         entity.setUpdateDate(new Date());
     }
 
-    public static void updateBefore(BaseEntity entity, String userId) {
+    public static void updateBefore(BaseEntity entity, Long userId) {
         updateBefore(entity);
         entity.setUpdateBy(userId);
     }

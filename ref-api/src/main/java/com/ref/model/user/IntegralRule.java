@@ -3,7 +3,7 @@ package com.ref.model.user;
 import com.ref.base.model.BaseEntity;
 
 public class IntegralRule extends BaseEntity {
-    private Integer id;
+    private Long id;
 
     private String type;
 
@@ -11,11 +11,11 @@ public class IntegralRule extends BaseEntity {
 
     private String description;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -44,7 +44,7 @@ public class IntegralRule extends BaseEntity {
     }
 
     @Override
-    public Object getPrimaryKey() {
+    public Long getPrimaryKey() {
         return this.id;
     }
 

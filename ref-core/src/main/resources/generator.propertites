@@ -4,6 +4,6 @@ jdbc_driver=com.mysql.jdbc.Driver
 jdbc_url=jdbc:mysql://tdsql-riapcm09.sh.cdb.myqcloud.com:33/ref?serverTimezone=UTC&amp;characterEncoding=utf-8
 jdbc_user=xin
 jdbc_password=fperxin@7102
-table_name=comment
-entity_name=Comment
+table_name=user_integral
+entity_name=UserIntegral
 package_prefix=com.ref

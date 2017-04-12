@@ -18,5 +18,6 @@ public class PathConstants {
     public static final String ROUTE_NOTE = "note";
     public static final String ROUTE_NOTE_ADD = "/add";
     public static final String ROUTE_NOTE_MODIFY = "/modify/{noteId}";
-    public static final String ROUTE_NOTE_GET_PAGE = "/page";
+    public static final String ROUTE_NOTE_GET_PAGE_HOT = "/page_hot";
+    public static final String ROUTE_NOTE_GET_PAGE_NEW = "/page_new";
 }

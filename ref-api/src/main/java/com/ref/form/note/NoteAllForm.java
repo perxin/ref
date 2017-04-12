@@ -8,7 +8,7 @@ import java.io.Serializable;
  *
  * Created by perxin on 2017/4/11.
  */
-public class NoteForm extends Note implements Serializable {
+public class NoteAllForm extends Note implements Serializable {
 
     private static final long serialVersionUID = -2568029185106950455L;
 

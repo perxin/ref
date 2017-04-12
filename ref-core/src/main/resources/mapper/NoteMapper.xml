@@ -15,6 +15,9 @@
         <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
         <result column="deleted" jdbcType="TINYINT" property="deleted"/>
     </resultMap>
+    <sql id="Base_Table_Name">
+        note
+    </sql>
     <sql id="Base_Column_List">
         id, name, note_sort_id, description, views, comments, praise_number, create_date,
         create_by, update_date, update_by, deleted
@@ -177,5 +180,17 @@
 
     <select id="selectSelective" >
 
+    </select>
+
+    <select id="selectHot" resultMap="BaseResultMap" >
+        SELECT <include refid="Base_Column_List" />
+        FROM <include refid="Base_Table_Name" />
+        ORDER BY views, comments, praise_number
+    </select>
+
+    <select id="selectNewDate" resultMap="BaseResultMap" >
+        SELECT <include refid="Base_Column_List" />
+        FROM <include refid="Base_Table_Name" />
+        ORDER BY create_date DESC
     </select>
 </mapper>

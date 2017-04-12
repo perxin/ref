@@ -21,6 +21,9 @@ public class BaseResource {
     private static Logger logger = LoggerFactory.getLogger(BaseResource.class);
 
     protected Long getLoginUserId(String token) {
+        if (StringUtils.isEmpty(token)) {
+            throw new BusinessException(ErrorCode.ERROR_CODE_NO_AUTHORIZATION);
+        }
         String userId = RSAUtil.decryptByPrivateKey(token, RSAUtil.STR_PRIVATE_KEY);
         return userId == null ? null : Long.parseLong(userId);
     }

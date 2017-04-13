@@ -12,4 +12,6 @@ public interface IntegralService {
     int getIntegralByType(String type);
 
     int addIntegral(IntegralRecord record) throws BusinessException;
+
+    int getTotalIntegral(Long userId) throws BusinessException;
 }

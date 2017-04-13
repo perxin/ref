@@ -6,6 +6,7 @@ import com.ref.base.constant.CommonConstant;
 import com.ref.base.util.JsonUtil;
 import com.ref.constant.PathConstants;
 import com.ref.form.note.NoteAllForm;
+import com.ref.model.note.Comment;
 import com.ref.service.note.NoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,4 +52,20 @@ public class NoteResource extends BaseResource {
         PageInfo pageInfo = noteService.getPageNew(pageNum, pageSize);
         return returnSuccess(JsonUtil.objectToJson(pageInfo));
     }
+
+    @GET
+    @Path(PathConstants.ROUTE_NOTE_GET_NOTE_DETAIL)
+    public Response noteDetail(@PathParam(value = "noteId") String noteId) {
+        NoteAllForm noteAllForm = noteService.getNoteDetail(noteId);
+        return returnSuccess(JsonUtil.objectToJson(noteAllForm));
+    }
+
+    @POST
+    @Path(PathConstants.ROUTE_NOTE_GET_COMMENT)
+    public Response commentAdd(@Valid Comment comment, @CookieParam("token") String token) {
+        comment.setCreateBy(getLoginUserId(token));
+        noteService.commentAdd(comment);
+        return returnSuccess(CommonConstant.SUCCESS_JSON);
+    }
+
 }

@@ -8,6 +8,7 @@ import com.ref.base.util.EntityUtil;
 import com.ref.dao.note.NoteDataMapper;
 import com.ref.dao.note.NoteMapper;
 import com.ref.form.note.NoteAllForm;
+import com.ref.model.note.Comment;
 import com.ref.model.note.Note;
 import com.ref.model.note.NoteData;
 import com.ref.service.note.NoteService;
@@ -64,5 +65,15 @@ public class NoteServiceImpl implements NoteService {
         PageHelper.startPage(pageNum, pageSize);
         PageInfo<Note> pageInfo = new PageInfo<>(noteMapper.selectNewDate());
         return pageInfo;
+    }
+
+    @Override
+    public NoteAllForm getNoteDetail(String noteId) {
+        return null;
+    }
+
+    @Override
+    public void commentAdd(Comment comment) {
+
     }
 }

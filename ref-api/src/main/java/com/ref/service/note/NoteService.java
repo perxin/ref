@@ -3,6 +3,7 @@ package com.ref.service.note;
 import com.github.pagehelper.PageInfo;
 import com.ref.base.exception.BusinessException;
 import com.ref.form.note.NoteAllForm;
+import com.ref.model.note.Comment;
 import com.ref.model.note.Note;
 
 /**
@@ -18,4 +19,8 @@ public interface NoteService {
     PageInfo getPageHot(int pageNum, int pageSize);
 
     PageInfo getPageNew(int pageNum, int pageSize);
+
+    NoteAllForm getNoteDetail(String noteId);
+
+    void commentAdd(Comment comment);
 }

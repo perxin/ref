@@ -5,7 +5,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import java.io.Serializable;
 import java.util.Date;
 
-public abstract class BaseEntity implements Serializable {
+public abstract class BaseEntity extends AbstractPage implements Serializable {
 	
 	private static final long serialVersionUID = -5284494226304695232L;
 

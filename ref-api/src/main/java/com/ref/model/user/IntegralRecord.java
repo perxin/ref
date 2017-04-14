@@ -11,6 +11,13 @@ public class IntegralRecord extends BaseEntity {
 
     private Integer integralRuleId;
 
+    private String description;
+
+    public IntegralRecord(Long userId, Integer integral) {
+        this.userId = userId;
+        this.integral = integral;
+    }
+
     public Long getId() {
         return id;
     }
@@ -41,6 +48,14 @@ public class IntegralRecord extends BaseEntity {
 
     public void setIntegralRuleId(Integer integralRuleId) {
         this.integralRuleId = integralRuleId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
     @Override

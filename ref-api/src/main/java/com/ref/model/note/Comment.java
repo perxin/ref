@@ -12,7 +12,7 @@ public class Comment extends BaseEntity {
 
     private Long replyId;
 
-    private Boolean type;
+    private int type;
 
     private String content;
 
@@ -40,11 +40,11 @@ public class Comment extends BaseEntity {
         this.replyId = replyId;
     }
 
-    public Boolean getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(Boolean type) {
+    public void setType(int type) {
         this.type = type;
     }
 

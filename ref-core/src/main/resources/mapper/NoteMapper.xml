@@ -178,8 +178,26 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="selectSelective" >
-
+    <select id="selectSelective" resultType="com.ref.form.note.NoteAllForm" parameterType="com.ref.form.note.NoteSearchForm" >
+        SELECT <include refid="Base_Column_List" />, data.content
+        FROM note, note_data data
+        <where>
+            <if test="name != null and name != ''">
+                AND note.name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="noteSortId != null">
+                AND note.note_sort_id = #{noteSortId,jdbcType=BIGINT}
+            </if>
+            <if test="description != null and description != ''">
+                AND note.description = CONCAT('%', #{description}, '%')
+            </if>
+            <if test="content != null and content != ''">
+                AND data.content = CONCAT('%', #{content}, '%')
+            </if>
+            AND note.id = data.id
+            AND note.deleted = 0
+        </where>
+        ORDER BY note.update_date DESC, note.create_date DESC
     </select>
 
     <select id="selectHot" resultMap="BaseResultMap" >

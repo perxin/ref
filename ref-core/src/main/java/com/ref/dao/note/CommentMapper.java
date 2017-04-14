@@ -2,6 +2,8 @@ package com.ref.dao.note;
 
 import com.ref.model.note.Comment;
 
+import java.util.List;
+
 public interface CommentMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -16,4 +18,6 @@ public interface CommentMapper {
     int updateByPrimaryKeyWithBLOBs(Comment record);
 
     int updateByPrimaryKey(Comment record);
+
+    List<Comment> selectByNoteId(Long noteId);
 }

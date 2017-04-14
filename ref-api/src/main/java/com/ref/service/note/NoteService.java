@@ -3,8 +3,8 @@ package com.ref.service.note;
 import com.github.pagehelper.PageInfo;
 import com.ref.base.exception.BusinessException;
 import com.ref.form.note.NoteAllForm;
+import com.ref.form.note.NoteSearchForm;
 import com.ref.model.note.Comment;
-import com.ref.model.note.Note;
 
 /**
  *
@@ -14,13 +14,13 @@ public interface NoteService {
 
     void addNoteAll(NoteAllForm noteAllForm) throws BusinessException;
 
-    PageInfo<Note> getPage(Note note) throws BusinessException;
+    PageInfo<NoteAllForm> getPage(NoteSearchForm noteSearchForm) throws BusinessException;
 
     PageInfo getPageHot(int pageNum, int pageSize);
 
     PageInfo getPageNew(int pageNum, int pageSize);
 
-    NoteAllForm getNoteDetail(String noteId);
+    NoteAllForm getNoteDetail(Long noteId);
 
-    void commentAdd(Comment comment);
+    void commentAdd(Comment comment) throws BusinessException;
 }

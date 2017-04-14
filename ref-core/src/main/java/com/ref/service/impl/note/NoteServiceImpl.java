@@ -5,9 +5,11 @@ import com.github.pagehelper.PageInfo;
 import com.ref.base.constant.CommonConstant;
 import com.ref.base.exception.BusinessException;
 import com.ref.base.util.EntityUtil;
+import com.ref.dao.note.CommentMapper;
 import com.ref.dao.note.NoteDataMapper;
 import com.ref.dao.note.NoteMapper;
 import com.ref.form.note.NoteAllForm;
+import com.ref.form.note.NoteSearchForm;
 import com.ref.model.note.Comment;
 import com.ref.model.note.Note;
 import com.ref.model.note.NoteData;
@@ -29,6 +31,9 @@ public class NoteServiceImpl implements NoteService {
     @Autowired
     private NoteDataMapper noteDataMapper;
 
+    @Autowired
+    private CommentMapper commentMapper;
+
     @Override
     public void addNoteAll(NoteAllForm noteAllForm) throws BusinessException {
         checkParam(noteAllForm);
@@ -48,9 +53,9 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public PageInfo<Note> getPage(Note note) throws BusinessException {
-        //Todo
-        return null;
+    public PageInfo<NoteAllForm> getPage(NoteSearchForm noteSearchForm) throws BusinessException {
+        PageInfo<NoteAllForm> pageInfo = new PageInfo<>(noteMapper.selectSelective((NoteSearchForm) noteSearchForm.startPage()));
+        return pageInfo;
     }
 
     @Override
@@ -68,12 +73,18 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public NoteAllForm getNoteDetail(String noteId) {
-        return null;
+    public NoteAllForm getNoteDetail(Long noteId) {
+        NoteAllForm noteAllForm = (NoteAllForm) noteMapper.selectByPrimaryKey(noteId);
+        NoteData noteData = noteDataMapper.selectByPrimaryKey(noteId);
+        if (noteData != null) {
+            noteAllForm.setContent(noteData.getContent());
+        }
+        noteAllForm.setCommentList(commentMapper.selectByNoteId(noteId));
+        return noteAllForm;
     }
 
     @Override
-    public void commentAdd(Comment comment) {
+    public void commentAdd(Comment comment) throws BusinessException {
 
     }
 }

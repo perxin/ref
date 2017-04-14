@@ -46,8 +46,8 @@ public class UserResource extends BaseResource {
 	}
 
 	@PUT
-	@Path(PathConstants.ROUTE_USER_LOGOUT)
-	public Response logout(@CookieParam("token") String token) {
+	@Path(PathConstants.ROUTE_USER_SIGNOUT)
+	public Response signOut(@CookieParam("token") String token) {
 		log.info(getLoginUserId(token) + "");
         NewCookie cookie = new NewCookie("token", "", "/", null, null, 0, false);
 		return Response.status(Status.OK).entity(CommonConstant.SUCCESS_JSON).cookie(cookie).type(MediaType.APPLICATION_JSON).build();

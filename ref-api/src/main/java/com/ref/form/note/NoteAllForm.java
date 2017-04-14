@@ -25,4 +25,12 @@ public class NoteAllForm extends Note implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
 }

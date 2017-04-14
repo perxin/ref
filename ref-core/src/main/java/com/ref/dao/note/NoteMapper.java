@@ -1,6 +1,7 @@
 package com.ref.dao.note;
 
 import com.ref.form.note.NoteAllForm;
+import com.ref.form.note.NoteSearchForm;
 import com.ref.model.note.Note;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface NoteMapper {
 
     int updateByPrimaryKey(Note record);
 
-    List<Note> selectSelective(NoteAllForm noteAllForm);
+    List<NoteAllForm> selectSelective(NoteSearchForm noteSearchForm);
 
     List<Note> selectNewDate();
 

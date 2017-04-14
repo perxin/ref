@@ -6,6 +6,7 @@
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="integral" jdbcType="INTEGER" property="integral"/>
         <result column="integral_rule_id" jdbcType="INTEGER" property="integralRuleId"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
         <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
         <result column="create_by" jdbcType="BIGINT" property="createBy"/>
         <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
@@ -13,8 +14,8 @@
         <result column="deleted" jdbcType="TINYINT" property="deleted"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, user_id, integral, integral_rule_id, create_date, create_by, update_date, update_by,
-        deleted
+        id, user_id, integral, integral_rule_id, description, create_date, create_by, update_date,
+        update_by, deleted
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -28,13 +29,13 @@
     </delete>
     <insert id="insert" parameterType="com.ref.model.user.IntegralRecord" useGeneratedKeys="true" keyProperty="id">
         insert into integral_record (id, user_id, integral,
-        integral_rule_id, create_date, create_by,
-        update_date, update_by, deleted
-        )
+        integral_rule_id, description, create_date,
+        create_by, update_date, update_by,
+        deleted)
         values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{integral,jdbcType=INTEGER},
-        #{integralRuleId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT},
-        #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT}, #{deleted,jdbcType=TINYINT}
-        )
+        #{integralRuleId,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+        #{createBy,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT},
+        #{deleted,jdbcType=TINYINT})
     </insert>
     <insert id="insertSelective" parameterType="com.ref.model.user.IntegralRecord" useGeneratedKeys="true" keyProperty="id">
         insert into integral_record
@@ -50,6 +51,9 @@
             </if>
             <if test="integralRuleId != null">
                 integral_rule_id,
+            </if>
+            <if test="description != null">
+                description,
             </if>
             <if test="createDate != null">
                 create_date,
@@ -80,6 +84,9 @@
             <if test="integralRuleId != null">
                 #{integralRuleId,jdbcType=INTEGER},
             </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
             <if test="createDate != null">
                 #{createDate,jdbcType=TIMESTAMP},
             </if>
@@ -109,6 +116,9 @@
             <if test="integralRuleId != null">
                 integral_rule_id = #{integralRuleId,jdbcType=INTEGER},
             </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
             <if test="createDate != null">
                 create_date = #{createDate,jdbcType=TIMESTAMP},
             </if>
@@ -132,6 +142,7 @@
         set user_id = #{userId,jdbcType=BIGINT},
         integral = #{integral,jdbcType=INTEGER},
         integral_rule_id = #{integralRuleId,jdbcType=INTEGER},
+        description = #{description,jdbcType=VARCHAR},
         create_date = #{createDate,jdbcType=TIMESTAMP},
         create_by = #{createBy,jdbcType=BIGINT},
         update_date = #{updateDate,jdbcType=TIMESTAMP},
@@ -139,4 +150,10 @@
         deleted = #{deleted,jdbcType=TINYINT}
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        SELECT <include refid="BaseResultMap" />
+        FROM <include refid="Base_Table_Name" />
+        WHERE deleted = 0
+    </select>
 </mapper>

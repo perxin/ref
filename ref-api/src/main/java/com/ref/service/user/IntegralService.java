@@ -1,5 +1,6 @@
 package com.ref.service.user;
 
+import com.github.pagehelper.PageInfo;
 import com.ref.base.exception.BusinessException;
 import com.ref.model.user.IntegralRecord;
 
@@ -14,4 +15,6 @@ public interface IntegralService {
     int addIntegral(IntegralRecord record) throws BusinessException;
 
     int getTotalIntegral(Long userId) throws BusinessException;
+
+    PageInfo<IntegralRecord> getIntegralRecordPage(int pageNum, int pageSize) throws BusinessException;
 }

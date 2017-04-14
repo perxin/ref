@@ -6,6 +6,7 @@ import com.ref.base.constant.CommonConstant;
 import com.ref.base.util.JsonUtil;
 import com.ref.constant.PathConstants;
 import com.ref.form.note.NoteAllForm;
+import com.ref.form.note.NoteSearchForm;
 import com.ref.model.note.Comment;
 import com.ref.service.note.NoteService;
 import org.slf4j.Logger;
@@ -40,6 +41,13 @@ public class NoteResource extends BaseResource {
     }
 
     @GET
+    @Path(PathConstants.ROUTE_NOTE_GET_PAGE)
+    public Response getPage(@BeanParam NoteSearchForm noteSearchForm) {
+        PageInfo pageInfo = noteService.getPage(noteSearchForm);
+        return returnSuccess(JsonUtil.objectToJson(pageInfo));
+    }
+
+    @GET
     @Path(PathConstants.ROUTE_NOTE_GET_PAGE_HOT)
     public Response getPageHot(@QueryParam("pageNum") int pageNum, @QueryParam("pageSize") int pageSize) {
         PageInfo pageInfo = noteService.getPageHot(pageNum, pageSize);
@@ -55,7 +63,7 @@ public class NoteResource extends BaseResource {
 
     @GET
     @Path(PathConstants.ROUTE_NOTE_GET_NOTE_DETAIL)
-    public Response noteDetail(@PathParam(value = "noteId") String noteId) {
+    public Response noteDetail(@PathParam(value = "noteId") Long noteId) {
         NoteAllForm noteAllForm = noteService.getNoteDetail(noteId);
         return returnSuccess(JsonUtil.objectToJson(noteAllForm));
     }

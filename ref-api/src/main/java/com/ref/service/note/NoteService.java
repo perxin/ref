@@ -23,4 +23,5 @@ public interface NoteService {
     NoteAllForm getNoteDetail(Long noteId);
 
     void commentAdd(Comment comment) throws BusinessException;
+
 }

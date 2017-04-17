@@ -22,5 +22,11 @@ public class PathConstants {
     public static final String ROUTE_NOTE_GET_PAGE_HOT = "/page_hot";
     public static final String ROUTE_NOTE_GET_PAGE_NEW = "/page_new";
     public static final String ROUTE_NOTE_GET_NOTE_DETAIL = "/{noteId}";
-    public static final String ROUTE_NOTE_GET_COMMENT = "/comment";
+    public static final String ROUTE_NOTE_COMMENT_ADD = "/comment";
+
+    ////////////////////////////////////////////////////////////
+
+    public static final String ROUTE_FILE = "file";
+    public static final String ROUTE_FILE_UPLOAD = "/upload";
+    public static final String ROUTE_FILE_PAGE = "/page";
 }

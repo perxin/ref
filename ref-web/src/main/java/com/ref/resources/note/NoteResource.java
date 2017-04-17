@@ -69,7 +69,7 @@ public class NoteResource extends BaseResource {
     }
 
     @POST
-    @Path(PathConstants.ROUTE_NOTE_GET_COMMENT)
+    @Path(PathConstants.ROUTE_NOTE_COMMENT_ADD)
     public Response commentAdd(@Valid Comment comment, @CookieParam("token") String token) {
         comment.setCreateBy(getLoginUserId(token));
         noteService.commentAdd(comment);

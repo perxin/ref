@@ -12,6 +12,7 @@ public class ServiceApplication extends ResourceConfig {
         // register application resources
         register(UserResource.class);
         register(NoteResource.class);
+//        register(FileResource.class);
 
         // register filters
 

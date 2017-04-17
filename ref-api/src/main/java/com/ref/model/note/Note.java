@@ -20,6 +20,16 @@ public class Note extends BaseEntity {
 
     private Integer praiseNumber;
 
+    public Note() {
+    }
+
+    public Note(Long id, Integer views, Integer comments, Integer praiseNumber) {
+        this.id = id;
+        this.views = views;
+        this.comments = comments;
+        this.praiseNumber = praiseNumber;
+    }
+
     public Long getId() {
         return id;
     }

@@ -43,15 +43,6 @@ public class NoteServiceImpl implements NoteService {
         noteDataMapper.insertSelective(new NoteData(note.getPrimaryKey(), noteAllForm.getContent()));
     }
 
-    private void checkParam(NoteAllForm noteAllForm) {
-        if (StringUtils.isEmpty(noteAllForm.getName())) {
-            throw new BusinessException(CommonConstant.ErrorCode.ERROR_CODE_PARAMETER_ILLEGAL, "名字不能为空");
-        }
-        if (StringUtils.isEmpty(noteAllForm.getContent())) {
-            throw new BusinessException(CommonConstant.ErrorCode.ERROR_CODE_PARAMETER_ILLEGAL, "内容不能为空");
-        }
-    }
-
     @Override
     public PageInfo<NoteAllForm> getPage(NoteSearchForm noteSearchForm) throws BusinessException {
         PageInfo<NoteAllForm> pageInfo = new PageInfo<>(noteMapper.selectSelective((NoteSearchForm) noteSearchForm.startPage()));
@@ -74,6 +65,7 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public NoteAllForm getNoteDetail(Long noteId) {
+        noteCount(noteId, 0);
         NoteAllForm noteAllForm = (NoteAllForm) noteMapper.selectByPrimaryKey(noteId);
         NoteData noteData = noteDataMapper.selectByPrimaryKey(noteId);
         if (noteData != null) {
@@ -85,6 +77,43 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public void commentAdd(Comment comment) throws BusinessException {
+        checkParamComment(comment);
+        EntityUtil.insertBefore(comment, comment.getCreateBy());
+        commentMapper.insertSelective(comment);
+        noteCount(comment.getNoteId(), 1);
+    }
 
+    private void noteCount(Long noteId, int type) throws BusinessException {
+        Note note = noteMapper.selectByPrimaryKey(noteId);
+        switch (type) {
+            case (0) :
+                note.setViews(note.getViews() + 1);
+                break;
+            case (1) :
+                note.setComments(note.getComments() + 1);
+                break;
+            case (2) :
+                note.setPraiseNumber(note.getPraiseNumber() + 1);
+                break;
+        }
+        noteMapper.updateByPrimaryKeySelective(note);
+    }
+
+    private void checkParam(NoteAllForm noteAllForm) throws BusinessException {
+        if (StringUtils.isEmpty(noteAllForm.getName())) {
+            throw new BusinessException(CommonConstant.ErrorCode.ERROR_CODE_PARAMETER_ILLEGAL, "名字不能为空");
+        }
+        if (StringUtils.isEmpty(noteAllForm.getContent())) {
+            throw new BusinessException(CommonConstant.ErrorCode.ERROR_CODE_PARAMETER_ILLEGAL, "内容不能为空");
+        }
+    }
+
+    private void checkParamComment(Comment comment) throws BusinessException {
+        if (comment.getNoteId() == null) {
+            throw new BusinessException(CommonConstant.ErrorCode.ERROR_CODE_PARAMETER_ILLEGAL, "文章id不能为空");
+        }
+        if (StringUtils.isEmpty(comment.getContent())) {
+            throw new BusinessException(CommonConstant.ErrorCode.ERROR_CODE_PARAMETER_ILLEGAL, "内容不能为空");
+        }
     }
 }

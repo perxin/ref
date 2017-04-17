@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ref.dao.system.FileMapper">
+    <resultMap id="BaseResultMap" type="com.ref.model.system.File">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="relation_id" jdbcType="BIGINT" property="relationId"/>
+        <result column="relation_type" jdbcType="VARCHAR" property="relationType"/>
+        <result column="file_url" jdbcType="VARCHAR" property="fileUrl"/>
+        <result column="file_name" jdbcType="VARCHAR" property="fileName"/>
+        <result column="file_size" jdbcType="VARCHAR" property="fileSize"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+        <result column="deleted" jdbcType="TINYINT" property="deleted"/>
+    </resultMap>
+    <sql id="Base_Table_Name">
+        file
+    </sql>
+    <sql id="Base_Column_List">
+        id, relation_id, relation_type, file_url, file_name, file_size, create_date, create_by,
+        update_date, update_by, deleted
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from file
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from file
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.ref.model.system.File">
+        insert into file (id, relation_id, relation_type,
+        file_url, file_name, file_size,
+        create_date, create_by, update_date,
+        update_by, deleted)
+        values (#{id,jdbcType=BIGINT}, #{relationId,jdbcType=BIGINT}, #{relationType,jdbcType=VARCHAR},
+        #{fileUrl,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, #{fileSize,jdbcType=VARCHAR},
+        #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP},
+        #{updateBy,jdbcType=BIGINT}, #{deleted,jdbcType=TINYINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ref.model.system.File">
+        insert into file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="relationId != null">
+                relation_id,
+            </if>
+            <if test="relationType != null">
+                relation_type,
+            </if>
+            <if test="fileUrl != null">
+                file_url,
+            </if>
+            <if test="fileName != null">
+                file_name,
+            </if>
+            <if test="fileSize != null">
+                file_size,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="relationId != null">
+                #{relationId,jdbcType=BIGINT},
+            </if>
+            <if test="relationType != null">
+                #{relationType,jdbcType=VARCHAR},
+            </if>
+            <if test="fileUrl != null">
+                #{fileUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileSize != null">
+                #{fileSize,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="deleted != null">
+                #{deleted,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ref.model.system.File">
+        update file
+        <set>
+            <if test="relationId != null">
+                relation_id = #{relationId,jdbcType=BIGINT},
+            </if>
+            <if test="relationType != null">
+                relation_type = #{relationType,jdbcType=VARCHAR},
+            </if>
+            <if test="fileUrl != null">
+                file_url = #{fileUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                file_name = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileSize != null">
+                file_size = #{fileSize,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ref.model.system.File">
+        update file
+        set relation_id = #{relationId,jdbcType=BIGINT},
+        relation_type = #{relationType,jdbcType=VARCHAR},
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+        file_name = #{fileName,jdbcType=VARCHAR},
+        file_size = #{fileSize,jdbcType=VARCHAR},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=BIGINT},
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+        update_by = #{updateBy,jdbcType=BIGINT},
+        deleted = #{deleted,jdbcType=TINYINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectByRelationIdAndType" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT <include refid="Base_Column_List"/>
+        FROM <include refid="Base_Table_Name"/>
+        WHERE deleted = 0
+            AND relation_id = #{relationId,jdbcType=BIGINT}
+            AND relation_type = #{relationType,jdbcType=VARCHAR}
+    </select>
+</mapper>

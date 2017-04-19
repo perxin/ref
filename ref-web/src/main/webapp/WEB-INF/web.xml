@@ -60,7 +60,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Jersey REST Service</servlet-name>
-        <url-pattern>/rest/*</url-pattern>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>DruidStatView</servlet-name>
@@ -68,6 +68,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>DruidStatView</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/druid/*</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -179,7 +179,7 @@
     </update>
 
     <select id="selectSelective" resultType="com.ref.form.note.NoteAllForm" parameterType="com.ref.form.note.NoteSearchForm" >
-        SELECT <include refid="Base_Column_List" />, data.content
+        SELECT note.*, data.content
         FROM note, note_data data
         <where>
             <if test="name != null and name != ''">

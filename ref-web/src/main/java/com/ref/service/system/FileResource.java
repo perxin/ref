@@ -22,8 +22,8 @@ public class FileResource extends BaseResource {
     @POST
     @Path(PathConstants.ROUTE_FILE_UPLOAD)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response upload(@FormDataParam("file") InputStream file) {
-
+    public Response upload(@FormDataParam("file") InputStream file, @CookieParam("token") String token) {
+        fileService.upload(file, getLoginUserId(token));
         return returnSuccess(CommonConstant.SUCCESS_JSON);
     }
 

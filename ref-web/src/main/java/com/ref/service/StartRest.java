@@ -17,6 +17,7 @@ public class StartRest {
     }
 
     public static void main(String[] args) throws InterruptedException {
+
         StartRest handle = new StartRest();
         handle.startServer("http://127.0.0.1/ref/");
 
@@ -26,7 +27,6 @@ public class StartRest {
     }
 
     private HttpServer startServer(String... url) {
-
         ResourceConfig rc = buildResourceConfig();
         String urlRun = url.length > 0 ? url[0] : BASE_URI;
         HttpServer server = GrizzlyHttpServerFactory.createHttpServer(URI.create(urlRun), rc);

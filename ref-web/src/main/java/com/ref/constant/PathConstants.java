@@ -8,6 +8,11 @@ public class PathConstants {
 
     ////////////////////////////////////////////////////////////
 
+    public static final String ROUTE_MAIN = "S";
+    public static final String ROUTE_MAIN_INDEX = "/index";
+
+    ////////////////////////////////////////////////////////////
+
     public static final String ROUTE_USER = "user";
     public static final String ROUTE_USER_SIGN_UP = "/sign_up";
     public static final String ROUTE_USER_SIGN_IN = "/sign_in";

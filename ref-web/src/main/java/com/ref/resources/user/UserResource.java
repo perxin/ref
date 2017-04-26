@@ -34,7 +34,7 @@ public class UserResource extends BaseResource {
 		User user = userService.add(name, password);
 		NewCookie cookie = new NewCookie("token", RSAUtil.encryptByPublicKey(user.getId().toString(),RSAUtil.STR_PUBLIC_KEY), "/", null, null, 60 * 60, false);
 		return Response.status(Status.OK).entity(CommonConstant.SUCCESS_JSON).cookie(cookie).type(MediaType.APPLICATION_JSON).build();
-	}
+}
 
 	@POST
 	@Path(PathConstants.ROUTE_USER_SIGN_IN)

@@ -38,6 +38,13 @@ public class NoteResource extends BaseResource {
         return view;
     }
 
+    @RequestMapping(PathConstants.ROUTE_EDIT)
+    public ModelAndView edit() {
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/edit");
+        return view;
+    }
+
     @ResponseBody
     @RequestMapping(PathConstants.ROUTE_NOTE_ADD)
     public BaseResult add(HttpServletRequest request, NoteAllForm noteAllForm) {

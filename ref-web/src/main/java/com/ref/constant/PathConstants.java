@@ -22,6 +22,7 @@ public class PathConstants {
     ////////////////////////////////////////////////////////////
 
     public static final String ROUTE_NIC_EDIT = "/nic";
+    public static final String ROUTE_EDIT = "/edit";
     public static final String ROUTE_NOTE = "note";
     public static final String ROUTE_NOTE_ADD = "/add";
     public static final String ROUTE_NOTE_MODIFY = "/modify/{noteId}";

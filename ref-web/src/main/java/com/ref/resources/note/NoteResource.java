@@ -1,30 +1,29 @@
 package com.ref.resources.note;
 
 import com.github.pagehelper.PageInfo;
-import com.ref.base.Resource.BaseResource;
-import com.ref.base.constant.CommonConstant;
-import com.ref.base.util.JsonUtil;
+import com.ref.base.exception.BusinessException;
+import com.ref.base.model.BaseResult;
 import com.ref.constant.PathConstants;
 import com.ref.form.note.NoteAllForm;
 import com.ref.form.note.NoteSearchForm;
 import com.ref.model.note.Comment;
+import com.ref.resources.BaseResource;
 import com.ref.service.note.NoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
  * Created by perxin on 2017/4/11.
  */
-@Path(PathConstants.ROUTE_NOTE)
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+@Controller
 public class NoteResource extends BaseResource {
 
     private Logger log = LoggerFactory.getLogger(NoteResource.class);
@@ -32,48 +31,62 @@ public class NoteResource extends BaseResource {
     @Autowired
     private NoteService noteService;
 
-    @POST
-    @Path(PathConstants.ROUTE_NOTE_ADD)
-    public Response add(@Valid NoteAllForm noteAllForm, @CookieParam("token") String token) {
-        noteAllForm.setCreateBy(getLoginUserId(token));
-        noteService.addNoteAll(noteAllForm);
-        return returnSuccess(CommonConstant.SUCCESS_JSON);
+    @RequestMapping(PathConstants.ROUTE_NIC_EDIT)
+    public ModelAndView nic() {
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/nicedit");
+        return view;
     }
 
-    @GET
-    @Path(PathConstants.ROUTE_NOTE_GET_PAGE)
-    public Response getPage(@BeanParam NoteSearchForm noteSearchForm) {
-        PageInfo pageInfo = noteService.getPage(noteSearchForm);
-        return returnSuccess(JsonUtil.objectToJson(pageInfo));
+    @ResponseBody
+    @RequestMapping(PathConstants.ROUTE_NOTE_ADD)
+    public BaseResult add(HttpServletRequest request, NoteAllForm noteAllForm) {
+        try {
+            noteAllForm.setCreateBy(getUserId(request));
+            noteService.addNoteAll(noteAllForm);
+            return successResult();
+        } catch (BusinessException e) {
+            return erroResult(e.getDescription());
+        }
     }
 
-    @GET
-    @Path(PathConstants.ROUTE_NOTE_GET_PAGE_HOT)
-    public Response getPageHot(@QueryParam("pageNum") int pageNum, @QueryParam("pageSize") int pageSize) {
+    @ResponseBody
+    @RequestMapping(PathConstants.ROUTE_NOTE_GET_PAGE)
+    public BaseResult getPage(NoteSearchForm noteSearchForm) {
+        try {
+            PageInfo pageInfo = noteService.getPage(noteSearchForm);
+            return successResult(pageInfo);
+        } catch (BusinessException e) {
+            return erroResult(e.getDescription());
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(PathConstants.ROUTE_NOTE_GET_PAGE_HOT)
+    public PageInfo getPageHot(int pageNum, int pageSize) {
         PageInfo pageInfo = noteService.getPageHot(pageNum, pageSize);
-        return returnSuccess(JsonUtil.objectToJson(pageInfo));
+        return pageInfo;
     }
 
-    @GET
-    @Path(PathConstants.ROUTE_NOTE_GET_PAGE_NEW)
-    public Response getPageNew(@QueryParam("pageNum") int pageNum, @QueryParam("pageSize") int pageSize) {
+    @ResponseBody
+    @RequestMapping(PathConstants.ROUTE_NOTE_GET_PAGE_NEW)
+    public PageInfo getPageNew(int pageNum, int pageSize) {
         PageInfo pageInfo = noteService.getPageNew(pageNum, pageSize);
-        return returnSuccess(JsonUtil.objectToJson(pageInfo));
+        return pageInfo;
     }
 
-    @GET
-    @Path(PathConstants.ROUTE_NOTE_GET_NOTE_DETAIL)
-    public Response noteDetail(@PathParam(value = "noteId") Long noteId) {
+    @ResponseBody
+    @RequestMapping(PathConstants.ROUTE_NOTE_GET_NOTE_DETAIL)
+    public NoteAllForm noteDetail(Long noteId) {
         NoteAllForm noteAllForm = noteService.getNoteDetail(noteId);
-        return returnSuccess(JsonUtil.objectToJson(noteAllForm));
+        return noteAllForm;
     }
 
-    @POST
-    @Path(PathConstants.ROUTE_NOTE_COMMENT_ADD)
-    public Response commentAdd(@Valid Comment comment, @CookieParam("token") String token) {
-        comment.setCreateBy(getLoginUserId(token));
+    @ResponseBody
+    @RequestMapping(PathConstants.ROUTE_NOTE_COMMENT_ADD)
+    public void commentAdd(HttpServletRequest request, Comment comment) {
+        comment.setCreateBy(getUserId(request));
         noteService.commentAdd(comment);
-        return returnSuccess(CommonConstant.SUCCESS_JSON);
     }
 
 }

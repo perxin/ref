@@ -1,25 +1,22 @@
 package com.ref.resources.user;
 
-import com.ref.base.Resource.BaseResource;
-import com.ref.base.constant.CommonConstant;
 import com.ref.base.exception.BusinessException;
-import com.ref.base.util.RSAUtil;
+import com.ref.base.model.BaseResult;
 import com.ref.constant.PathConstants;
 import com.ref.model.user.User;
+import com.ref.resources.BaseResource;
 import com.ref.service.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.NewCookie;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import javax.servlet.http.HttpServletRequest;
 
-@Path(PathConstants.ROUTE_USER)
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Controller
 public class UserResource extends BaseResource {
 
     private Logger log = LoggerFactory.getLogger(UserResource.class);
@@ -27,30 +24,48 @@ public class UserResource extends BaseResource {
 	@Autowired
 	private UserService userService;
 
-	@POST
-	@Path(PathConstants.ROUTE_USER_SIGN_UP)
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response signUp(@FormParam("name") String name, @FormParam("password") String password) throws BusinessException {
-		User user = userService.add(name, password);
-		NewCookie cookie = new NewCookie("token", RSAUtil.encryptByPublicKey(user.getId().toString(),RSAUtil.STR_PUBLIC_KEY), "/", null, null, 60 * 60, false);
-		return Response.status(Status.OK).entity(CommonConstant.SUCCESS_JSON).cookie(cookie).type(MediaType.APPLICATION_JSON).build();
-}
+    @RequestMapping(PathConstants.ROUTE_MAIN_INDEX)
+    public ModelAndView home() {
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/index");
+        return view;
+    }
 
-	@POST
-	@Path(PathConstants.ROUTE_USER_SIGN_IN)
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response signIn(@FormParam("name") String name, @FormParam("password") String password) {
-		User user = userService.postLogin(name, password);
-		NewCookie cookie = new NewCookie("token", RSAUtil.encryptByPublicKey(user.getId().toString(),RSAUtil.STR_PUBLIC_KEY), "/", null, null, 60 * 60, false);
-		return Response.status(Status.OK).entity(CommonConstant.SUCCESS_JSON).cookie(cookie).type(MediaType.APPLICATION_JSON).build();
+	@RequestMapping(PathConstants.ROUTE_MAIN_SIGN)
+	public ModelAndView sign() {
+		ModelAndView view = new ModelAndView();
+		view.setViewName("/sign");
+		return view;
 	}
 
-	@PUT
-	@Path(PathConstants.ROUTE_USER_SIGNOUT)
-	public Response signOut(@CookieParam("token") String token) {
-		log.info(getLoginUserId(token) + "");
-        NewCookie cookie = new NewCookie("token", "", "/", null, null, 0, false);
-		return Response.status(Status.OK).entity(CommonConstant.SUCCESS_JSON).cookie(cookie).type(MediaType.APPLICATION_JSON).build();
+	@ResponseBody
+	@RequestMapping(PathConstants.ROUTE_USER_SIGN_UP)
+	public BaseResult signUp(HttpServletRequest request, String name, String password) throws BusinessException {
+		try {
+			User user = userService.add(name,password);
+			setSession(request, user.getName(), user.getId());
+			return successResult(user);
+		} catch (BusinessException e) {
+			return erroResult(e.getDescription());
+		}
+	}
+
+	@ResponseBody
+	@RequestMapping(PathConstants.ROUTE_USER_SIGN_IN)
+	public BaseResult signIn(HttpServletRequest request, String name, String password) {
+        try {
+            User user = userService.postLogin(name, password);
+            setSession(request, user.getName(), user.getId());
+            return successResult();
+        } catch (BusinessException e) {
+            return erroResult(e.getDescription());
+        }
+	}
+
+	@RequestMapping(PathConstants.ROUTE_USER_SIGNOUT)
+	public ModelAndView signOut(HttpServletRequest request) {
+		removeSession(request);
+		return home();
 	}
 
 }

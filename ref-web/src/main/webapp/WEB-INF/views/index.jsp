@@ -27,15 +27,20 @@
         <!-- link and dropdown -->
         <ul class="nav navbar-nav hidden-sm nar">
           <li class="dropdown pos-stc">
-            <a href="<%=request.getContextPath()%>/home" data-toggle="dropdown" class="dropdown-toggle nar-logo">
+            <a href="<%=request.getContextPath()%>/home" class="dropdown-toggle nar-logo">
               <span>阅读论坛</span>
             </a>
           </li>
           <li class="dropdown pos-stc">
-            <a href="<%=request.getContextPath()%>/home" data-toggle="dropdown" class="dropdown-toggle">
+            <a href="<%=request.getContextPath()%>/home" class="dropdown-toggle">
               <span>首页</span>
             </a>
           </li>
+            <li class="dropdown pos-stc">
+                <a href="<%=request.getContextPath()%>/edit" class="dropdown-toggle">
+                    <span>写文章</span>
+                </a>
+            </li>
           <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="dropdown-toggle">
               <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>

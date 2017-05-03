@@ -184,7 +184,7 @@
     <!-- / navbar -->
 
     <!-- content -->
-    <div class="app-content">
+    <div class="app-content navbar-collapse">
       <div ui-butterbar></div>
       <a href class="off-screen-toggle hide" data-toggle="class:off-screen" data-target=".app-aside" ></a>
       <div class="app-content-body fade-in-up content">

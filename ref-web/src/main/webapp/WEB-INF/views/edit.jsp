@@ -20,11 +20,6 @@
     <script type="text/javascript" charset="utf-8" src="<%=request.getContextPath()%>/ueditor/ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="<%=request.getContextPath()%>/ueditor/ueditor.all.min.js"> </script>
     <script type="text/javascript" charset="utf-8" src="<%=request.getContextPath()%>/ueditor/lang/zh-cn/zh-cn.js"></script>
-    <style type="text/css">
-        div{
-            width:89%;
-        }
-    </style>
 </head>
 <body>
 
@@ -195,16 +190,16 @@
     <hr style="margin: 1px"/>
 
     <!-- content -->
-    <div class="app-content">
+    <div class="app-content navbar-collapse">
         <div ui-butterbar></div>
         <a href class="off-screen-toggle hide" data-toggle="class:off-screen" data-target=".app-aside" ></a>
         <div class="app-content-body fade-in-up content">
             <!-- COPY the content from "tpl/" -->
             <div>
-                <h1>编辑</h1>
+                <h4>编辑</h4>
                 <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
             </div>
-            <div>
+            <div style="width: 100%,">
                 <button onclick="getContent()">提交</button>
             </div>
             <%--<div id="btns">

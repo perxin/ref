@@ -913,8 +913,11 @@ body {
   .navbar-collapse,
   .app-content,
   .app-footer {
-    margin-left: 200px;
+    margin-left: 15%;
   }
+  /*.app-content {*/
+    /*margin-left: 11%;*/
+  /*}*/
   .app-aside-right {
     position: absolute;
     top: 50px;

@@ -74,8 +74,13 @@ public class BaseResource {
         request.getSession().removeAttribute("userId");
     }
 
-    protected Long getUserId(HttpServletRequest request) {
-        return (Long) request.getSession().getAttribute("userId");
+    protected Long getUserId(HttpServletRequest request) throws BusinessException {
+        Long userId = (Long) request.getSession().getAttribute("userId");
+        if (userId == null) {
+            throw new BusinessException(ErrorCode.ERROR_CODE_CUSTOM, "请先登录");
+        } else {
+            return userId;
+        }
     }
 
     public BaseResult successResult(Object... message){

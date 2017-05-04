@@ -31,13 +31,12 @@
             <!-- link and dropdown -->
             <ul class="nav navbar-nav hidden-sm nar">
                 <li class="dropdown pos-stc">
-                    <a href="<%=request.getContextPath()%>/home" data-toggle="dropdown"
-                       class="dropdown-toggle nar-logo">
+                    <a href="<%=request.getContextPath()%>/home" class="dropdown-toggle nar-logo">
                         <span>阅读论坛</span>
                     </a>
                 </li>
                 <li class="dropdown pos-stc">
-                    <a href="<%=request.getContextPath()%>/home" data-toggle="dropdown" class="dropdown-toggle">
+                    <a href="<%=request.getContextPath()%>/home" class="dropdown-toggle">
                         <span>首页</span>
                     </a>
                 </li>
@@ -156,17 +155,6 @@
     </div>
     <!-- /content -->
 
-    <!-- footer -->
-    <div class="app-footer wrapper b-t bg-light">
-        <span class="pull-right">1.0.0 <a href="#app" class="m-l-sm text-muted"><i class="fa fa-long-arrow-up"></i></a></span>
-        @2017 <a href="<%=request.getContextPath()%>/home" target="_blank" title="阅读论坛">阅读论坛</a>
-    </div>
-    <!-- / footer -->
-</div>
-<!-- jQuery -->
-<script type="application/javascript" src="<%=request.getContextPath()%>/media/js/jquery.min.js"></script>
-<script type="application/javascript" src="<%=request.getContextPath()%>/media/js/bootstrap.js"></script>
-<script type="application/javascript" src="<%=request.getContextPath()%>/media/js/login.js"></script>
-<script type="application/javascript" src="<%=request.getContextPath()%>/media/js/jquery.js"></script>
+   <jsp:include page="footer.jsp" />
 </body>
 </html>

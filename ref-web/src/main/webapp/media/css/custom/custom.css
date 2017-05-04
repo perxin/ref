@@ -71,3 +71,20 @@
 .nar-logo {
 	color: chocolate;
 }
+
+/* 文章编辑页 */
+.edit-title {
+	margin-bottom: 10px;
+	margin-left: 30%;
+	width: 30%;
+}
+
+.edit-submit {
+    width: 30%;
+    margin-left: 30%;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+.edit-submit-button {
+    /*background-color: #8b8e99;*/
+}

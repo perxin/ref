@@ -211,4 +211,18 @@
         FROM <include refid="Base_Table_Name" />
         ORDER BY create_date DESC
     </select>
+
+    <select id="selectById" parameterType="java.lang.Long" resultType="com.ref.form.note.NoteAllForm">
+        select
+        <include refid="Base_Column_List"/>
+        from note
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap" >
+        SELECT <include refid="Base_Column_List" />
+        FROM <include refid="Base_Table_Name" />
+        WHERE name = #{name,jdbcType=VARCHAR}
+        AND deleted = 0
+    </select>
 </mapper>

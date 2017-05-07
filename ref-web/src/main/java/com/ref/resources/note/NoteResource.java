@@ -31,13 +31,6 @@ public class NoteResource extends BaseResource {
     @Autowired
     private NoteService noteService;
 
-    @RequestMapping(PathConstants.ROUTE_NIC_EDIT)
-    public ModelAndView nic() {
-        ModelAndView view = new ModelAndView();
-        view.setViewName("/nicedit");
-        return view;
-    }
-
     @RequestMapping(PathConstants.ROUTE_EDIT)
     public ModelAndView edit() {
         ModelAndView view = new ModelAndView();
@@ -58,14 +51,22 @@ public class NoteResource extends BaseResource {
     }
 
     @ResponseBody
-    @RequestMapping(PathConstants.ROUTE_NOTE_GET_PAGE)
-    public BaseResult getPage(NoteSearchForm noteSearchForm) {
+    @RequestMapping(PathConstants.ROUTE_NOTE_MODIFY)
+    public BaseResult modify(HttpServletRequest request, NoteAllForm noteAllForm) {
         try {
-            PageInfo pageInfo = noteService.getPage(noteSearchForm);
-            return successResult(pageInfo);
+            noteAllForm.setCreateBy(getUserId(request));
+            noteService.modify(noteAllForm);
+            return successResult();
         } catch (BusinessException e) {
             return erroResult(e.getDescription());
         }
+    }
+
+    @ResponseBody
+    @RequestMapping(PathConstants.ROUTE_NOTE_GET_PAGE)
+    public PageInfo getPage(NoteSearchForm noteSearchForm) {
+        PageInfo pageInfo = noteService.getPage(noteSearchForm);
+        return pageInfo;
     }
 
     @ResponseBody
@@ -82,11 +83,14 @@ public class NoteResource extends BaseResource {
         return pageInfo;
     }
 
-    @ResponseBody
     @RequestMapping(PathConstants.ROUTE_NOTE_GET_NOTE_DETAIL)
-    public NoteAllForm noteDetail(Long noteId) {
-        NoteAllForm noteAllForm = noteService.getNoteDetail(noteId);
-        return noteAllForm;
+    public ModelAndView noteDetail(HttpServletRequest request) {
+        Long id = Long.parseLong(request.getParameter("id"));
+        NoteAllForm noteAllForm = noteService.getNoteDetail(id);
+        ModelAndView view = new ModelAndView();
+        view.addObject("noteAllForm", noteAllForm);
+        view.setViewName("/note");
+        return view;
     }
 
     @ResponseBody

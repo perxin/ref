@@ -37,10 +37,22 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public void addNoteAll(NoteAllForm noteAllForm) throws BusinessException {
         checkParam(noteAllForm);
+        if (noteMapper.selectByName(noteAllForm.getName()) != null) {
+            throw new BusinessException(CommonConstant.ErrorCode.ERROR_CODE_PARAMETER_ILLEGAL, "该文章标题已经存在");
+        }
         Note note = noteAllForm;
         EntityUtil.insertBefore(note, noteAllForm.getCreateBy());
         noteMapper.insertSelective(note);
         noteDataMapper.insertSelective(new NoteData(note.getPrimaryKey(), noteAllForm.getContent()));
+    }
+
+    @Override
+    public void modify(NoteAllForm noteAllForm) throws BusinessException {
+        checkParam(noteAllForm);
+        Note note = noteAllForm;
+        EntityUtil.updateBefore(note, noteAllForm.getCreateBy());
+        noteMapper.updateByPrimaryKeySelective(note);
+        noteDataMapper.updateByPrimaryKeySelective(new NoteData(note.getPrimaryKey(), noteAllForm.getContent()));
     }
 
     @Override
@@ -66,7 +78,7 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public NoteAllForm getNoteDetail(Long noteId) {
         noteCount(noteId, 0);
-        NoteAllForm noteAllForm = (NoteAllForm) noteMapper.selectByPrimaryKey(noteId);
+        NoteAllForm noteAllForm = noteMapper.selectById(noteId);
         NoteData noteData = noteDataMapper.selectByPrimaryKey(noteId);
         if (noteData != null) {
             noteAllForm.setContent(noteData.getContent());
@@ -101,7 +113,7 @@ public class NoteServiceImpl implements NoteService {
 
     private void checkParam(NoteAllForm noteAllForm) throws BusinessException {
         if (StringUtils.isEmpty(noteAllForm.getName())) {
-            throw new BusinessException(CommonConstant.ErrorCode.ERROR_CODE_PARAMETER_ILLEGAL, "名字不能为空");
+            throw new BusinessException(CommonConstant.ErrorCode.ERROR_CODE_PARAMETER_ILLEGAL, "标题不能为空");
         }
         if (StringUtils.isEmpty(noteAllForm.getContent())) {
             throw new BusinessException(CommonConstant.ErrorCode.ERROR_CODE_PARAMETER_ILLEGAL, "内容不能为空");

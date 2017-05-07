@@ -24,4 +24,8 @@ public interface NoteMapper {
     List<Note> selectNewDate();
 
     List<Note> selectHot();
+
+    NoteAllForm selectById(Long id);
+
+    Note selectByName(String name);
 }

@@ -24,4 +24,5 @@ public interface NoteService {
 
     void commentAdd(Comment comment) throws BusinessException;
 
+    void modify(NoteAllForm noteAllForm) throws BusinessException;
 }

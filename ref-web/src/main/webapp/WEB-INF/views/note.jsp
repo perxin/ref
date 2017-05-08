@@ -1,4 +1,5 @@
 <%@ page language="java" import="com.ref.form.note.NoteAllForm" pageEncoding="utf-8"%>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -31,17 +32,69 @@
             <!-- COPY the content from "tpl/" -->
             <div class="padder">
                 <% NoteAllForm note = (NoteAllForm) request.getAttribute("noteAllForm"); %>
-                <div class="panel panel-warning">
+                <div class="panel panel-warning note-content">
                     <div class="panel-heading note">
                         <% out.print(note.getName());%>
                         <%--<button onclick="noteEdit(<%out.print(note.getId());%>)" type="button" class="btn btn-info edit-edit" aria-haspopup="true" aria-expanded="false">编辑</button>--%>
+                        <a href class="text-muted m-xs right">
+                            <%
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                out.print(sdf.format(note.getUpdateDate()));
+                            %>
+                        </a>
                     </div>
                     <ul class="list-group">
                         <%--<li class="list-group-item"><% out.print(note.getCreateDate());%></li>--%>
-                        <li class="list-group-item">描述：<% out.print(note.getDescription());%></li>
+                        <li class="list-group-item">描述：<% if (note.getDescription() != null) out.print(note.getDescription());%></li>
                     </ul>
                     <div class="panel-body">
                         <% out.print(note.getContent());%>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <ul class="nav nav-pills nav-sm">
+                                <li style="float: right"><a href class="text-muted m-xs"><i class="icon-eyeglasses"></i> <% out.print(note.getViews());%> </a></li>
+                                <li style="float: right"><a href class="text-muted m-xs"><i class="icon-fire"></i> <% out.print(note.getPraiseNumber());%> </a></li>
+                                <li style="float: right"><a href class="text-muted m-xs"><i class="icon-note"></i> <% out.print(note.getComments());%> </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <%
+                    if (note.getCommentList() != null) {
+                        for (int i = 0; i < note.getCommentList().size(); i ++) {
+                %>
+                          <div class="streamline b-l b-info m-l-lg m-b padder-v">
+                            <div>
+                                <div class="m-l-lg">
+                                    <div class="m-b-xs">
+                                        <a href class="h4"><%out.print(note.getCommentList().get(i).getCreateBy());%></a>
+                                        <span class="text-muted m-l-sm pull-right">
+                                            <% out.print(sdf.format(note.getCommentList().get(i).getCreateDate()));%>
+                                        </span>
+                                    </div>
+                                    <div class="m-b">
+                                        <div><%out.print(note.getCommentList().get(i).getContent());%></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                <%        }
+                    }
+                %>
+                <div class="panel panel-default m-t-md m-b-n-sm pos-rlt">
+                    <form id="comment-submit">
+                        <input id="note-id" name="noteId" type="hidden" value="<% out.print(note.getId());%>"/>
+                        <input name="type" type="hidden" value="0"/>
+                        <textarea id="comment-content" name="content" class="form-control no-border" rows="3" placeholder="Your comment..."></textarea>
+                    </form>
+                    <div class="panel-footer bg-light lter">
+                        <button class="btn btn-info pull-right btn-sm" style="margin-bottom: 10px;" onclick="commentSubmit()">Comment</button>
+                        <ul class="nav nav-pills nav-sm">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
                     </div>
                 </div>
             </div>

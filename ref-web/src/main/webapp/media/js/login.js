@@ -192,7 +192,6 @@ function isSignIn(path) {
     var user = $("#isSignIn").val();
     if (user == null || user == "" || user == undefined) {
         location.href = contextPath + "/sign";
-        alert(location.href + "=" + self.location);
     } else {
         location.href = contextPath + "/" + path;
     }

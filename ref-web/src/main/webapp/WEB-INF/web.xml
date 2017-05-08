@@ -105,7 +105,7 @@
     <session-config>
         <session-timeout>20</session-timeout>
     </session-config>
-    <error-page>
+    <!--<error-page>
         <error-code>404</error-code>
         <location>/views/error/error404.jsp</location>
     </error-page>
@@ -116,7 +116,7 @@
     <error-page>
         <error-code>405</error-code>
         <location>/views/error/error405.jsp</location>
-    </error-page>
+    </error-page>-->
     <welcome-file-list>
         <welcome-file>/ring/index</welcome-file>
     </welcome-file-list>

@@ -15,6 +15,20 @@
         <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
         <result column="deleted" jdbcType="TINYINT" property="deleted"/>
     </resultMap>
+    <resultMap id="BaseResultMapAllForm" type="com.ref.form.note.NoteAllForm">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="note_sort_id" jdbcType="BIGINT" property="noteSortId"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="views" jdbcType="INTEGER" property="views"/>
+        <result column="comments" jdbcType="INTEGER" property="comments"/>
+        <result column="praise_number" jdbcType="INTEGER" property="praiseNumber"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+        <result column="deleted" jdbcType="TINYINT" property="deleted"/>
+    </resultMap>
     <sql id="Base_Table_Name">
         note
     </sql>
@@ -203,7 +217,7 @@
     <select id="selectHot" resultMap="BaseResultMap" >
         SELECT <include refid="Base_Column_List" />
         FROM <include refid="Base_Table_Name" />
-        ORDER BY views, comments, praise_number
+        ORDER BY views DESC, comments DESC, praise_number DESC
     </select>
 
     <select id="selectNewDate" resultMap="BaseResultMap" >
@@ -212,7 +226,7 @@
         ORDER BY create_date DESC
     </select>
 
-    <select id="selectById" parameterType="java.lang.Long" resultType="com.ref.form.note.NoteAllForm">
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMapAllForm">
         select
         <include refid="Base_Column_List"/>
         from note

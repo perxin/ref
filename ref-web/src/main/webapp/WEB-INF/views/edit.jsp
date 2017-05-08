@@ -35,11 +35,12 @@
             <!-- COPY the content from "tpl/" -->
             <h4>编辑文章</h4>
             <div class="input-group edit-title">
-                <span class="input-group-addon" id="basic-addon1">标题</span>
+                <span class="input-group-addon">标题</span>
                 <input id="note_title" type="text" class="form-control" placeholder="请输入文章标题" aria-describedby="basic-addon1">
             </div>
-            <div class="edit-title">
-                <div id="message"></div>
+            <div class="input-group">
+                <span class="input-group-addon">文章描述</span>
+                <input id="note_description" type="text" class="form-control" placeholder="请输入简短的描述语言" aria-describedby="basic-addon1">
             </div>
             <div>
                 <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>

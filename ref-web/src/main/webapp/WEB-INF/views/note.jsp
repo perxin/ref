@@ -68,7 +68,7 @@
                             <div>
                                 <div class="m-l-lg">
                                     <div class="m-b-xs">
-                                        <a href class="h4"><%out.print(note.getCommentList().get(i).getCreateBy());%></a>
+                                        <a href class="h4"><%out.print(note.getCommentList().get(i).getUserName());%></a>
                                         <span class="text-muted m-l-sm pull-right">
                                             <% out.print(sdf.format(note.getCommentList().get(i).getCreateDate()));%>
                                         </span>

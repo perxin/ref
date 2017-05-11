@@ -15,3 +15,17 @@ function getNotePage(page) {
         }
     });
 }
+
+function searchNote(pageNum) {
+    location.href = contextPath + "/note/notePage?name=" + $("#note-title-search").val() + "&pageNum=" + pageNum;
+}
+
+$(document).ready(
+    function() {
+        $("#note-title-search").keydown(function(event) {
+            if (event.keyCode == 13) {
+                searchNote();
+            }
+        })
+    }
+);

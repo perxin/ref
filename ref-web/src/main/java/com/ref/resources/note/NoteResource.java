@@ -69,6 +69,15 @@ public class NoteResource extends BaseResource {
         return pageInfo;
     }
 
+    @RequestMapping(PathConstants.ROUTE_NOTE_PAGE)
+    public ModelAndView notePage(NoteSearchForm noteSearchForm) {
+        PageInfo pageInfo = noteService.getPage(noteSearchForm);
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/notePage");
+        view.addObject("page", pageInfo);
+        return view;
+    }
+
     @ResponseBody
     @RequestMapping(PathConstants.ROUTE_NOTE_GET_PAGE_HOT)
     public PageInfo getPageHot(int pageNum, int pageSize) {

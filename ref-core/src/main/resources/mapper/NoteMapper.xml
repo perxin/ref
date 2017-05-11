@@ -192,7 +192,7 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="selectSelective" resultType="com.ref.form.note.NoteAllForm" parameterType="com.ref.form.note.NoteSearchForm" >
+    <select id="selectSelective" resultMap="BaseResultMapAllForm" parameterType="com.ref.form.note.NoteSearchForm" >
         SELECT note.*, data.content
         FROM note, note_data data
         <where>

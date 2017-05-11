@@ -27,7 +27,17 @@
                     <span>写文章</span>
                 </a>
             </li>
-            <li class="dropdown">
+            <li class="dropdown pos-stc">
+                <a href="<%=request.getContextPath()%>/note/notePage" class="dropdown-toggle">
+                    <span>阅读文章</span>
+                </a>
+            </li>
+            <li class="dropdown pos-stc">
+                <a href="javascript:void(0);" class="dropdown-toggle" onclick="isSignIn('edit')">
+                    <span>闲聊</span>
+                </a>
+            </li>
+            <%--<li class="dropdown">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                     <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
                     <span translate="header.navbar.new.NEW">New</span> <span class="caret"></span>
@@ -49,7 +59,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li>--%>
         </ul>
         <!-- / link and dropdown -->
 

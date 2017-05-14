@@ -36,5 +36,6 @@ public class PathConstants {
 
     public static final String ROUTE_FILE = "file";
     public static final String ROUTE_FILE_UPLOAD = "/upload";
-    public static final String ROUTE_FILE_PAGE = "/page";
+    public static final String ROUTE_FILE_DOWNLOAD = "/download";
+    public static final String ROUTE_FILE_PAGE = "/file";
 }

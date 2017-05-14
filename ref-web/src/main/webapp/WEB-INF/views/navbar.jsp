@@ -33,10 +33,15 @@
                 </a>
             </li>
             <li class="dropdown pos-stc">
+                <a href="<%=request.getContextPath()%>/file" class="dropdown-toggle">
+                    <span>共享资源</span>
+                </a>
+            </li>
+            <%--<li class="dropdown pos-stc">
                 <a href="javascript:void(0);" class="dropdown-toggle" onclick="isSignIn('edit')">
                     <span>闲聊</span>
                 </a>
-            </li>
+            </li>--%>
             <%--<li class="dropdown">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                     <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
@@ -64,7 +69,7 @@
         <!-- / link and dropdown -->
 
         <!-- search form -->
-        <form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo" data-target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
+        <%--<form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo" data-target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
             <div class="form-group">
                 <div class="input-group">
                     <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control input-sm bg-light no-border rounded padder" placeholder="Search projects...">
@@ -73,7 +78,7 @@
               </span>
                 </div>
             </div>
-        </form>
+        </form>--%>
         <!-- / search form -->
 
         <%String name = (String)session.getAttribute("name");
@@ -141,19 +146,19 @@
                 </a>
                 <!-- dropdown -->
                 <ul class="dropdown-menu animated fadeInRight w">
-                    <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+                    <%--<li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
                         <div>
                             <p>300mb of 500mb used</p>
                         </div>
                         <progressbar value="60" class="progress-xs m-b-none bg-white"></progressbar>
-                    </li>
+                    </li>--%>
                     <li>
-                        <a href>
-                            <span class="badge bg-danger pull-right">30%</span>
-                            <span>Settings</span>
+                        <a href="<%=request.getContextPath()%>/user">
+                            <%--<span class="badge bg-danger pull-right">30%</span>--%>
+                            <span>个人信息</span>
                         </a>
                     </li>
-                    <li>
+                    <%--<li>
                         <a ui-sref="app.page.profile">Profile</a>
                     </li>
                     <li>
@@ -161,7 +166,7 @@
                             <span class="label bg-info pull-right">new</span>
                             Help
                         </a>
-                    </li>
+                    </li>--%>
                     <li class="divider"></li>
                     <li>
                         <a href="<%=request.getContextPath()%>/sign_out">Logout</a>

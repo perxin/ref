@@ -24,6 +24,9 @@ public class NoteSearchForm extends AbstractPage {
     @QueryParam("content")
     private String content;
 
+    @QueryParam("userId")
+    private String createBy;
+
     public String getName() {
         return name;
     }
@@ -54,5 +57,13 @@ public class NoteSearchForm extends AbstractPage {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
     }
 }

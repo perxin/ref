@@ -1,16 +1,18 @@
 package com.ref.service.impl.system;
 
-import com.ref.base.constant.CommonConstant.ErrorCode;
+import com.github.pagehelper.PageInfo;
+import com.ref.Resources.system.FileService;
 import com.ref.base.exception.BusinessException;
 import com.ref.base.util.EntityUtil;
 import com.ref.dao.system.FileMapper;
+import com.ref.dao.user.UserMapper;
 import com.ref.model.system.File;
-import com.ref.service.system.FileService;
-import org.apache.commons.lang3.StringUtils;
+import com.ref.model.user.IntegralRecord;
+import com.ref.model.user.User;
+import com.ref.service.user.IntegralService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.InputStream;
 import java.util.List;
 
 @Service
@@ -19,13 +21,19 @@ public class FileServiceImpl implements FileService {
     @Autowired
     private FileMapper fileMapper;
 
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private IntegralService integralService;
+
+    private static String path = "D:\\file";
+
     @Override
     public File saveFile(File file) throws BusinessException {
-        if (file.getRelationId() == null || StringUtils.isEmpty(file.getRelationType()) || StringUtils.isEmpty(file.getFileUrl())) {
-            throw new BusinessException(ErrorCode.ERROR_CODE_PARAMETER_ILLEGAL);
-        }
         EntityUtil.insertBefore(file, file.getCreateBy());
         fileMapper.insertSelective(file);
+        integralService.addIntegral(new IntegralRecord(file.getCreateBy(), 10, "上传文件"));
         return file;
     }
 
@@ -44,7 +52,33 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public String upload(InputStream inputStream, Long userId) throws BusinessException {
-        return null;
+    public void upload(byte[] bytes, Long userId, String name, long size) {
+        File file = new File();
+        file.setFileUrl(path + "\\" + name);
+        file.setFileName(name);
+        file.setFileSize(String.valueOf(size));
+        file.setCreateBy(userId);
+        saveFile(file);
+    }
+
+    @Override
+    public PageInfo<File> getPage(File file) throws BusinessException {
+        PageInfo<File> pageInfo = new PageInfo<>(fileMapper.selectSelective((File) file.startPage()));
+        for (File recoder : pageInfo.getList()) {
+            User user = userMapper.selectByPrimaryKey(recoder.getCreateBy());
+            recoder.setUserName(user.getName());
+        }
+        return pageInfo;
+    }
+
+    @Override
+    public String getFileUrl(Long id) {
+        File file = fileMapper.selectByPrimaryKey(id);
+        return file.getFileUrl();
+    }
+
+    @Override
+    public File getFile(Long id) {
+        return fileMapper.selectByPrimaryKey(id);
     }
 }

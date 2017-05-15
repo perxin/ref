@@ -208,6 +208,9 @@
             <if test="content != null and content != ''">
                 AND data.content = CONCAT('%', #{content}, '%')
             </if>
+            <if test="createBy != null">
+                AND note.create_by = #{createBy,jdbcType=BIGINT}
+            </if>
             AND note.id = data.id
             AND note.deleted = 0
         </where>

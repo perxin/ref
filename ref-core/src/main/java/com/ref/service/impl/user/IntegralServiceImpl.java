@@ -57,9 +57,9 @@ public class IntegralServiceImpl implements IntegralService {
     }
 
     @Override
-    public PageInfo<IntegralRecord> getIntegralRecordPage(int pageNum, int pageSize) throws BusinessException {
+    public PageInfo<IntegralRecord> getIntegralRecordPage(int pageNum, int pageSize, Long userId) throws BusinessException {
         PageHelper.startPage(pageNum, pageSize);
-        PageInfo<IntegralRecord> pageInfo = new PageInfo<>(integralRecordMapper.selectPage());
+        PageInfo<IntegralRecord> pageInfo = new PageInfo<>(integralRecordMapper.selectPage(userId));
         return pageInfo;
     }
 }

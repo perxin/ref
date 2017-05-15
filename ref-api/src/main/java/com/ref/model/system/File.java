@@ -18,6 +18,8 @@ public class File extends BaseEntity {
 
     private String fileSize;
 
+    private String userName;
+
     public File() {
     }
 
@@ -76,6 +78,14 @@ public class File extends BaseEntity {
 
     public void setFileSize(String fileSize) {
         this.fileSize = fileSize == null ? null : fileSize.trim();
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Override

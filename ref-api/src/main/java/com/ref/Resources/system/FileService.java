@@ -1,9 +1,9 @@
-package com.ref.service.system;
+package com.ref.Resources.system;
 
+import com.github.pagehelper.PageInfo;
 import com.ref.base.exception.BusinessException;
 import com.ref.model.system.File;
 
-import java.io.InputStream;
 import java.util.List;
 
 public interface FileService {
@@ -14,5 +14,11 @@ public interface FileService {
 
    void delete(Long id, Long userId) throws BusinessException;
 
-   String upload(InputStream inputStream, Long userId) throws BusinessException;
+   PageInfo<File> getPage(File file) throws BusinessException;
+
+   void upload(byte[] bytes, Long userId, String name, long size);
+
+   String getFileUrl(Long id);
+
+   File getFile(Long id);
 }

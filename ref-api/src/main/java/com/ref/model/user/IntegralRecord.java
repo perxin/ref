@@ -13,9 +13,14 @@ public class IntegralRecord extends BaseEntity {
 
     private String description;
 
-    public IntegralRecord(Long userId, Integer integral) {
+    public  IntegralRecord() {
+
+    }
+
+    public IntegralRecord(Long userId, Integer integral, String description) {
         this.userId = userId;
         this.integral = integral;
+        this.description = description;
     }
 
     public Long getId() {

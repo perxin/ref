@@ -1,6 +1,7 @@
 package com.ref.dao.user;
 
 import com.ref.model.user.IntegralRecord;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface IntegralRecordMapper {
 
     int updateByPrimaryKey(IntegralRecord record);
 
-    List<IntegralRecord> selectPage();
+    List<IntegralRecord> selectPage(@Param("userId") Long userId);
 }

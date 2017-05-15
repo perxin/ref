@@ -16,6 +16,8 @@ public class Comment extends BaseEntity {
 
     private String content;
 
+    private String userName;
+
     public Long getId() {
         return id;
     }
@@ -54,6 +56,14 @@ public class Comment extends BaseEntity {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Override

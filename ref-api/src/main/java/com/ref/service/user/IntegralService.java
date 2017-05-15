@@ -16,5 +16,5 @@ public interface IntegralService {
 
     int getTotalIntegral(Long userId) throws BusinessException;
 
-    PageInfo<IntegralRecord> getIntegralRecordPage(int pageNum, int pageSize) throws BusinessException;
+    PageInfo<IntegralRecord> getIntegralRecordPage(int pageNum, int pageSize, Long userId) throws BusinessException;
 }

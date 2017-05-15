@@ -154,9 +154,12 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="selectPage" resultMap="BaseResultMap">
+    <select id="selectPage" resultMap="BaseResultMap" parameterType="java.lang.Long">
         SELECT <include refid="Base_Column_List" />
         FROM <include refid="Base_Table_Name" />
         WHERE deleted = 0
+        <if test="userId != null">
+            AND user_id = #{userId,jdbcType=BIGINT}
+        </if>
     </select>
 </mapper>

@@ -19,4 +19,6 @@ public interface FileMapper {
     int updateByPrimaryKey(File record);
 
     List<File> selectByRelationIdAndType(@Param("relationId") Long relationId, @Param("relationType") String relationType);
+
+    List<File> selectSelective(File file);
 }

@@ -20,6 +20,8 @@ public class Note extends BaseEntity {
 
     private Integer praiseNumber;
 
+    private String userName;
+
     public Note() {
     }
 
@@ -84,6 +86,14 @@ public class Note extends BaseEntity {
 
     public void setPraiseNumber(Integer praiseNumber) {
         this.praiseNumber = praiseNumber;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Override

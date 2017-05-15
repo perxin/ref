@@ -14,8 +14,10 @@ import com.ref.form.note.NoteSearchForm;
 import com.ref.model.note.Comment;
 import com.ref.model.note.Note;
 import com.ref.model.note.NoteData;
+import com.ref.model.user.IntegralRecord;
 import com.ref.model.user.User;
 import com.ref.service.note.NoteService;
+import com.ref.service.user.IntegralService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +43,9 @@ public class NoteServiceImpl implements NoteService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private IntegralService integralService;
+
     @Override
     public void addNoteAll(NoteAllForm noteAllForm) throws BusinessException {
         checkParam(noteAllForm);
@@ -51,6 +56,8 @@ public class NoteServiceImpl implements NoteService {
         EntityUtil.insertBefore(note, noteAllForm.getCreateBy());
         noteMapper.insertSelective(note);
         noteDataMapper.insertSelective(new NoteData(note.getPrimaryKey(), noteAllForm.getContent()));
+
+        integralService.addIntegral(new IntegralRecord(noteAllForm.getCreateBy(), 10, "发布文章"));
     }
 
     @Override
@@ -119,6 +126,8 @@ public class NoteServiceImpl implements NoteService {
         EntityUtil.insertBefore(comment, comment.getCreateBy());
         commentMapper.insertSelective(comment);
         noteCount(comment.getNoteId(), 1);
+
+        integralService.addIntegral(new IntegralRecord(comment.getCreateBy(), 5, "评论"));
     }
 
     private void noteCount(Long noteId, int type) throws BusinessException {

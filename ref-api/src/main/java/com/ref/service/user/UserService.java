@@ -11,4 +11,7 @@ public interface UserService {
 
 	User postLogin(String name, String password) throws BusinessException;
 
+    User getUserById(Long userId);
+
+	String chat(String info, String userId, String ioc);
 }

@@ -172,4 +172,25 @@
             AND relation_id = #{relationId,jdbcType=BIGINT}
             AND relation_type = #{relationType,jdbcType=VARCHAR}
     </select>
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.ref.model.system.File" >
+        SELECT <include refid="Base_Column_List"/>
+        FROM <include refid="Base_Table_Name"/>
+        WHERE deleted = 0
+            <if test="id != null">
+                AND id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="relationId != null">
+                AND relation_id = #{relationId,jdbcType=BIGINT}
+            </if>
+            <if test="relationType != null">
+                AND relation_type = #{relationType,jdbcType=VARCHAR}
+            </if>
+            <if test="fileUrl != null">
+                AND file_url = #{fileUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="fileName != null">
+                AND file_name = #{fileName,jdbcType=VARCHAR}
+            </if>
+    </select>
 </mapper>

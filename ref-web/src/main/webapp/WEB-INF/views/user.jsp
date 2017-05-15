@@ -42,6 +42,7 @@
                     <a href="#" class="list-group-item">用户名：<% out.print(user.getName());%></a>
                     <a href="#" class="list-group-item">总积分：<% out.print(totalIntegral);%></a>
                     <a href="#" class="list-group-item">用户ID：<% out.print(user.getId());%></a>
+                    <a href="#" class="list-group-item">用户等级：<% out.print(totalIntegral / 100 + 1);%></a>
                     <a href="#" class="list-group-item">注册日期：<% out.print(sdf.format(user.getCreateDate()));%></a>
                     <a href="<%=request.getContextPath()%>/integral?pageNum=1&pageSize=10" class="list-group-item" style="color: deepskyblue;">查看我的积分记录</a>
                     <a href="<%=request.getContextPath()%>/note/notePage?userId=<% out.print(user.getId());%>" class="list-group-item" style="color: deepskyblue;">查看我的文章</a>

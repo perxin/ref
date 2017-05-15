@@ -94,4 +94,17 @@ public class UserResource extends BaseResource {
         return view;
     }
 
+	@RequestMapping(value="/ring")
+	public ModelAndView index(HttpServletRequest request){
+		ModelAndView view = new ModelAndView();
+		view.setViewName("/ring/ring");
+		return view;
+	}
+
+	@RequestMapping(value="/chat")
+	@ResponseBody
+	public String chat(HttpServletRequest request, String info, String userId, String ioc){
+		return userService.chat(info, null, null);
+	}
+
 }

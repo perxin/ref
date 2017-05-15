@@ -66,6 +66,8 @@ function uploadFile() {
             }*/
         }
     });
+}
 
-
+function filePage(pageNum) {
+    location.href = contextPath + "/file?pageNum=" + pageNum;
 }

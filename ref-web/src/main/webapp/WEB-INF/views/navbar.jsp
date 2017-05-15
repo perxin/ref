@@ -38,7 +38,7 @@
                 </a>
             </li>
             <%--<li class="dropdown pos-stc">
-                <a href="javascript:void(0);" class="dropdown-toggle" onclick="isSignIn('edit')">
+                <a href="javascript:void(0);" class="dropdown-toggle" onclick="isSignIn('ring')">
                     <span>闲聊</span>
                 </a>
             </li>--%>

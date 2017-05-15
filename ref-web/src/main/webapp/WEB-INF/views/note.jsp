@@ -23,7 +23,19 @@
 <body>
 <div class="app app-header-fixed" id="app">
     <jsp:include page="navbar.jsp" />
-
+        <div class="row search-row">
+            <div class="col-lg-6 search-div">
+                <form action="" method="get" role="search">
+                    <div class="input-group">
+                        <input name="searchkey" type="text" class="form-control search-input" placeholder="Search for...">
+                        <input name="sort" type="hidden" value="">
+                        <span class="input-group-btn">
+						<button id="submitsearch" class="btn btn-default search-input" type="submit">search</button>
+					</span>
+                    </div>
+                </form>
+            </div>
+        </div>
     <!-- content -->
     <div class="app-content navbar-collapse">
         <div ui-butterbar></div>

@@ -73,7 +73,7 @@
                             int[] num = pageInfo.getNavigatepageNums();
                             for (int i = 0; i < num.length; i ++) {
                         %>
-                        <li><a href="javascript:void(0);" onclick="integralPage(<%out.print(num[i]);%>);"><%out.print(num[i]);%></a></li>
+                        <li><a href="javascript:void(0);" onclick="filePage(<%out.print(num[i]);%>);"><%out.print(num[i]);%></a></li>
                         <%
                             }
                         %>
@@ -84,7 +84,7 @@
                         </li>
                     </ul>
                 </nav>
-                <div class="list-group" style="margin-top: 30px">
+                <div class="list-group" style="margin-top: 30px; margin-left: 40%;">
                     <form id="uploadFileForm" <%--action="<%=request.getContextPath()%>/upload"--%> <%--method="post" enctype="multipart/form-data"--%>>
                         <input type="file" name="file" />
                         <input type="button" value="上传文件" onclick="uploadFile()"/>

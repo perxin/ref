@@ -32,8 +32,7 @@ public class FileResource extends BaseResource {
     @RequestMapping(PathConstants.ROUTE_FILE_UPLOAD)
     public BaseResult upload(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
         try {
-            byte[] buf = FileUtil.inputStreamToByte(file.getInputStream());
-            FileUtil.byteToFile(buf, path, file.getOriginalFilename());
+            FileUtil.byteToFile(file.getBytes(), path, file.getOriginalFilename());
             fileService.upload(null, getUserId(request), file.getOriginalFilename(), file.getSize());
             return successResult();
         } catch (BusinessException e) {
